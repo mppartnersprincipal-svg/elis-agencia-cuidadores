@@ -9,6 +9,7 @@ import Testimonials from './components/Testimonials'
 import FAQ from './components/FAQ'
 import ContactSection from './components/ContactSection'
 import CTAFinal from './components/CTAFinal'
+import CoverageArea from './components/CoverageArea'
 import Footer from './components/Footer'
 
 export default function App() {
@@ -24,6 +25,7 @@ export default function App() {
         <Pricing />
         <Testimonials />
         <FAQ />
+        <CoverageArea />
         <ContactSection />
         <CTAFinal />
       </main>

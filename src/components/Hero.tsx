@@ -32,7 +32,7 @@ export default function Hero() {
               className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full bg-secondary-container/20 border border-secondary-container/30 text-secondary-fixed font-label text-label-md backdrop-blur-sm"
             >
               <Shield size={14} />
-              Mais de 200 famílias cuidadas em Salvador, BA
+              Agência de Cuidadores de Idosos em Salvador, BA
             </motion.span>
 
             <motion.h1
@@ -48,7 +48,7 @@ export default function Hero() {
               variants={fadeUp} transition={{ duration: 0.6 }}
               className="text-body-lg text-white/80 max-w-lg mb-8 leading-relaxed"
             >
-              Cuidadores verificados e treinados cuidam do seu idoso em casa — para que você possa trabalhar, descansar e viver sem culpa.
+              Cuidadores de idosos verificados e treinados para home care em Salvador — para que você possa trabalhar, descansar e viver sem culpa.
             </motion.p>
 
             <motion.div
@@ -80,9 +80,9 @@ export default function Hero() {
               className="flex flex-wrap gap-4"
             >
               {[
-                { icon: <Star size={14} className="fill-secondary-fixed text-secondary-fixed" />, text: '98% de satisfação' },
-                { icon: <Shield size={14} className="text-secondary-fixed" />, text: 'Verificados' },
-                { icon: <Heart size={14} className="text-secondary-fixed" />, text: '24/7 Disponível' },
+                { icon: <Star size={14} className="fill-secondary-fixed text-secondary-fixed" />, text: '200+ famílias em Salvador' },
+                { icon: <Shield size={14} className="text-secondary-fixed" />, text: 'Cuidadores verificados' },
+                { icon: <Heart size={14} className="text-secondary-fixed" />, text: 'Home care 24h' },
               ].map((b) => (
                 <div key={b.text} className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-full text-white/90 text-label-md font-label">
                   {b.icon} {b.text}

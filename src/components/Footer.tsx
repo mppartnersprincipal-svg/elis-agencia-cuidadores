@@ -23,7 +23,7 @@ export default function Footer() {
               <LogoElis variant="full" className="h-14 w-auto brightness-[1.6] saturate-50" />
             </div>
             <p className="text-body-md text-inverse-on-surface/60 leading-relaxed">
-              Cuidado humanizado e profissional para idosos e pacientes em Salvador, BA.
+              Agência de cuidadores de idosos em Salvador, BA. Home care 24h, enfermagem domiciliar, cuidados paliativos e acompanhante hospitalar para toda Salvador e região metropolitana.
             </p>
           </div>
 
