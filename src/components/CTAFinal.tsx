@@ -24,15 +24,15 @@ export default function CTAFinal() {
               transition={{ duration: 0.6 }}
             >
               <span className="inline-block bg-white/20 backdrop-blur-sm px-4 py-1.5 rounded-full font-label text-label-md mb-6">
-                Avaliação 100% Gratuita
+                Sem compromisso — avaliação gratuita
               </span>
 
               <h2 id="cta-title" className="font-headline text-headline-md mb-4 text-balance">
-                Seu Familiar Merece o Melhor Cuidado
+                Não espere uma crise para buscar ajuda
               </h2>
 
               <p className="text-body-lg opacity-90 max-w-xl mx-auto mb-10">
-                Não espere uma crise para buscar ajuda. Fale conosco agora e descubra como podemos transformar a qualidade de vida da sua família.
+                Quanto mais cedo você começa, mais fácil é adaptar o cuidado ao ritmo do seu familiar. Fale conosco agora e veja como podemos ajudar.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
@@ -68,7 +68,7 @@ export default function CTAFinal() {
               </div>
 
               <div className="flex flex-wrap justify-center gap-4 text-caption text-on-primary-container/70 font-label">
-                {['Avaliação gratuita', 'Sem compromisso', 'Resposta em 2h', 'Profissionais verificados'].map((badge) => (
+                {['Avaliação domiciliar gratuita', 'Resposta em até 2h', 'Você aprova o cuidador', 'Sem fidelidade mínima'].map((badge) => (
                   <span key={badge} className="flex items-center gap-1.5">
                     <span className="w-1 h-1 rounded-full bg-secondary-fixed inline-block" aria-hidden="true" />
                     {badge}

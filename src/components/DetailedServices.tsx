@@ -23,9 +23,9 @@ export default function DetailedServices() {
           transition={{ duration: 0.6 }}
           className="text-center mb-14"
         >
-          <h2 id="servicos-detalhados-title" className="section-title font-headline">O Que Nossos Cuidadores Fazem</h2>
+          <h2 id="servicos-detalhados-title" className="section-title font-headline">Cuidado Completo, Dia a Dia</h2>
           <p className="section-subtitle mx-auto">
-            Cuidado completo e integral, cobrindo todas as necessidades do dia a dia do seu familiar.
+            Tudo que seu familiar precisa — da higiene ao acompanhamento médico — feito por profissionais treinados, com rotina e sem improvisos.
           </p>
         </motion.div>
 
@@ -42,9 +42,9 @@ export default function DetailedServices() {
               <div className="w-12 h-12 bg-secondary/10 rounded-xl flex items-center justify-center mb-6">
                 <ShieldCheck size={24} className="text-secondary" aria-hidden="true" />
               </div>
-              <h3 className="font-headline text-headline-sm text-on-surface mb-4">O Padrão Ouro de Seleção</h3>
+              <h3 className="font-headline text-headline-sm text-on-surface mb-4">Só entra em casa quem a família aprova</h3>
               <p className="text-body-md text-on-surface-variant mb-6">
-                Cada cuidador passa por uma verificação de múltiplas camadas, incluindo triagem federal, exames de proficiência clínica e avaliação profunda de personalidade para inteligência emocional.
+                Verificação de antecedentes, checagem de formação, entrevistas presenciais e apresentação à família antes do primeiro dia. Menos de 3% dos candidatos chegam até você.
               </p>
             </div>
             <div className="grid grid-cols-3 gap-4 border-t border-outline-variant pt-6">
@@ -65,9 +65,9 @@ export default function DetailedServices() {
             className="bg-primary text-on-primary p-8 rounded-3xl shadow-ambient flex flex-col justify-center"
           >
             <Gamepad2 size={36} className="mb-6 text-primary-fixed" aria-hidden="true" />
-            <h3 className="font-headline text-headline-sm mb-4 text-on-primary-container">Treinamento Contínuo</h3>
+            <h3 className="font-headline text-headline-sm mb-4 text-on-primary-container">Sempre aprendendo para cuidar melhor</h3>
             <p className="text-body-md opacity-90">
-              Nossa equipe completa treinamentos mensais obrigatórios: Alzheimer, recuperação pós-cirúrgica e comunicação compassiva.
+              Treinamentos mensais em Alzheimer, recuperação pós-cirúrgica e comunicação humanizada. Seu familiar é atendido por quem está sempre atualizado.
             </p>
           </motion.div>
 

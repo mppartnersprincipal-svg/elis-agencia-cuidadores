@@ -67,9 +67,9 @@ export default function ContactSection() {
           transition={{ duration: 0.6 }}
           className="mb-14"
         >
-          <h2 id="contato-title" className="section-title font-headline">Solicite uma Avaliação Gratuita</h2>
+          <h2 id="contato-title" className="section-title font-headline">Comece hoje. A avaliação é gratuita.</h2>
           <p className="section-subtitle">
-            Preencha o formulário ou fale diretamente pelo WhatsApp. Respondemos em até 2 horas!
+            Preencha o formulário ou mande uma mensagem no WhatsApp. Nossa equipe responde em até 2 horas — incluindo fins de semana.
           </p>
         </motion.div>
 

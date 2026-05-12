@@ -17,9 +17,9 @@ export default function Services() {
           transition={{ duration: 0.6 }}
           className="mb-14"
         >
-          <h2 id="servicos-title" className="section-title font-headline">Modalidades de Atendimento</h2>
+          <h2 id="servicos-title" className="section-title font-headline">Encontre o Cuidado Certo para Seu Familiar</h2>
           <p className="section-subtitle">
-            Soluções flexíveis para cada necessidade, com cuidadores especializados e comprometidos.
+            Do acompanhamento diário ao cuidado integral 24h — adaptado à rotina e às necessidades reais da sua família.
           </p>
         </motion.div>
 
@@ -51,7 +51,7 @@ export default function Services() {
                   className="flex items-center justify-between w-full text-primary font-label text-label-md hover:text-primary-container transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 rounded"
                   aria-expanded={expanded === i}
                 >
-                  <span>Ver benefícios</span>
+                  <span>O que está incluso</span>
                   {expanded === i ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
                 </button>
 
@@ -80,7 +80,7 @@ export default function Services() {
                   rel="noopener noreferrer"
                   className="block w-full text-center bg-primary hover:bg-primary-container text-on-primary font-label text-label-md py-3 rounded-full transition-all duration-200 shadow-ambient hover:shadow-ambient-md"
                 >
-                  Solicitar este serviço
+                  Quero este serviço
                 </a>
               </div>
             </motion.article>

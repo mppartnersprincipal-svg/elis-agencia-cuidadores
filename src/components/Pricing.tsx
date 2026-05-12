@@ -15,9 +15,9 @@ export default function Pricing() {
           transition={{ duration: 0.6 }}
           className="text-center mb-14"
         >
-          <h2 id="valores-title" className="section-title font-headline">Investimento em Cuidado</h2>
+          <h2 id="valores-title" className="section-title font-headline">Escolha o Plano Certo para Seu Familiar</h2>
           <p className="section-subtitle mx-auto">
-            Transparência e flexibilidade para encontrar a melhor solução para sua família.
+            Valores transparentes, sem taxas escondidas. Não sabe qual escolher? A avaliação gratuita nos ajuda a indicar o ideal.
           </p>
         </motion.div>
 
@@ -32,8 +32,8 @@ export default function Pricing() {
             <MessageCircle size={18} className="text-on-primary" aria-hidden="true" />
           </div>
           <p className="text-body-md text-on-surface">
-            <strong className="text-primary">Avaliação domiciliar 100% gratuita.</strong>{' '}
-            Todos os valores são ajustados conforme as necessidades reais do paciente.
+            <strong className="text-primary">Não sabe qual plano escolher? A visita é gratuita.</strong>{' '}
+            Um profissional vai à sua casa e indica o que faz sentido para a situação real do seu familiar.
           </p>
         </motion.div>
 
@@ -93,7 +93,7 @@ export default function Pricing() {
                     : 'bg-primary hover:bg-primary-container text-on-primary focus:ring-primary'
                 }`}
               >
-                Solicitar Orçamento
+                Quero este plano
               </a>
             </motion.div>
           ))}

@@ -49,9 +49,9 @@ export default function Differentials() {
           transition={{ duration: 0.6 }}
           className="text-center mb-14"
         >
-          <h2 id="diferenciais-title" className="section-title font-headline">Por Que Escolher a Elis?</h2>
+          <h2 id="diferenciais-title" className="section-title font-headline">Por Que Mais de 200 Famílias Confiam na Elis</h2>
           <p className="section-subtitle mx-auto">
-            Mais do que um serviço — um compromisso com a qualidade de vida e segurança do seu familiar.
+            Qualquer agência diz que tem bons profissionais. Veja o que nos faz diferentes na prática.
           </p>
         </motion.div>
 

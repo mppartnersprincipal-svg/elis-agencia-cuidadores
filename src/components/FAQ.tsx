@@ -17,9 +17,9 @@ export default function FAQ() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 id="faq-title" className="section-title font-headline">Dúvidas Frequentes</h2>
+          <h2 id="faq-title" className="section-title font-headline">Perguntas que toda família faz</h2>
           <p className="section-subtitle mx-auto">
-            Respondemos as perguntas mais comuns para que você se sinta seguro ao nos contratar.
+            Respostas diretas para as dúvidas mais comuns — sem enrolação.
           </p>
         </motion.div>
 

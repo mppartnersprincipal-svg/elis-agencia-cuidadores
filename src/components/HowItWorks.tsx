@@ -31,9 +31,9 @@ export default function HowItWorks() {
           transition={{ duration: 0.6 }}
           className="text-center mb-14"
         >
-          <h2 id="como-funciona-title" className="section-title font-headline">Como Funciona</h2>
+          <h2 id="como-funciona-title" className="section-title font-headline">Do Primeiro Contato ao Cuidado em 5 Passos</h2>
           <p className="section-subtitle mx-auto">
-            Processo simples e transparente para garantir o melhor cuidado para seu familiar.
+            Simples, transparente e sem burocracia. Na maioria dos casos, o atendimento começa em menos de uma semana.
           </p>
         </motion.div>
 
@@ -93,19 +93,19 @@ export default function HowItWorks() {
             </div>
           </div>
           <div className="w-full lg:w-1/2 space-y-6">
-            <h2 className="font-headline text-headline-md text-primary">Avaliação Domiciliar Gratuita</h2>
+            <h2 className="font-headline text-headline-md text-primary">A visita que muda tudo</h2>
             <p className="text-body-lg text-on-surface-variant">
-              Antes de iniciar o cuidado, nossos profissionais realizam uma avaliação detalhada da saúde física e do ambiente doméstico. Isso garante que cada plano de cuidados seja personalizado para a realidade da sua família.
+              Nossa avaliação domiciliar gratuita vai além do diagnóstico clínico. Entendemos a rotina, os hábitos e o ambiente do seu familiar — para criar um plano que funciona de verdade, não um modelo pronto.
             </p>
             <div className="bg-surface-container-high p-6 rounded-2xl border-l-4 border-primary">
               <p className="italic text-on-surface-variant text-body-md leading-relaxed">
-                "A avaliação foi além da medicina — eles entenderam como minha mãe vivia. Notaram detalhes que não consideramos, tornando a casa muito mais segura."
+                "Eles foram à nossa casa e notaram coisas que nós mesmos não tínhamos visto. A casa ficou muito mais segura antes mesmo de o cuidado começar."
               </p>
               <div className="mt-4 flex items-center gap-3">
                 <div className="w-9 h-9 rounded-full bg-primary-fixed flex-shrink-0" />
                 <div>
                   <p className="font-bold text-on-surface text-label-md font-label">Ana Clara S.</p>
-                  <p className="text-caption text-on-surface-variant">Filha de paciente</p>
+                  <p className="text-caption text-on-surface-variant">Filha de paciente, Pituba</p>
                 </div>
               </div>
             </div>

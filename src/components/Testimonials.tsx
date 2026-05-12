@@ -69,8 +69,8 @@ export default function Testimonials() {
           className="flex flex-col md:flex-row justify-between items-end mb-10 gap-6"
         >
           <div>
-            <h2 id="depoimentos-title" className="section-title font-headline">O Que as Famílias Dizem</h2>
-            <p className="section-subtitle">Histórias reais de quem confiou no nosso cuidado.</p>
+            <h2 id="depoimentos-title" className="section-title font-headline">Famílias que já dormem tranquilas</h2>
+            <p className="section-subtitle">Veja o que dizem as famílias que confiaram o cuidado do seu familiar à Elis.</p>
           </div>
           <div className="flex gap-2">
             <button
