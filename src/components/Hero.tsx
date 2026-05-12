@@ -1,6 +1,14 @@
 import { motion } from 'framer-motion'
 import { ChevronDown, Star, Shield, Heart } from 'lucide-react'
 import { WHATSAPP_URL } from '../lib/constants'
+import { Avatar, AvatarImage, AvatarFallback } from './ui/avatar'
+
+const SOCIAL_PROOF_AVATARS = [
+  { src: 'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=80&q=80', alt: 'Família atendida pela Elis' },
+  { src: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&q=80', alt: 'Família atendida pela Elis' },
+  { src: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=80&q=80', alt: 'Família atendida pela Elis' },
+  { src: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&q=80', alt: 'Família atendida pela Elis' },
+]
 
 const fadeUp = { hidden: { opacity: 0, y: 24 }, visible: { opacity: 1, y: 0 } }
 
@@ -27,13 +35,33 @@ export default function Hero() {
             animate="visible"
             variants={{ visible: { transition: { staggerChildren: 0.14 } } }}
           >
-            <motion.span
+            {/* Social proof avatar group */}
+            <motion.div
               variants={fadeUp} transition={{ duration: 0.6 }}
-              className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full bg-secondary-container/20 border border-secondary-container/30 text-secondary-fixed font-label text-label-md backdrop-blur-sm"
+              className="flex items-center gap-3 mb-6"
             >
-              <Shield size={14} />
-              Agência de Cuidadores de Idosos em Salvador, BA
-            </motion.span>
+              <div className="flex -space-x-3">
+                {SOCIAL_PROOF_AVATARS.map((av, i) => (
+                  <Avatar
+                    key={i}
+                    className="ring-2 ring-white/30 w-10 h-10"
+                  >
+                    <AvatarImage src={av.src} alt={av.alt} />
+                    <AvatarFallback className="bg-secondary text-on-secondary text-xs">
+                      {String.fromCharCode(65 + i)}
+                    </AvatarFallback>
+                  </Avatar>
+                ))}
+              </div>
+              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white font-label text-label-md">
+                <div className="flex gap-0.5">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} size={11} className="fill-secondary-fixed text-secondary-fixed" aria-hidden="true" />
+                  ))}
+                </div>
+                <span>+200 famílias em Salvador</span>
+              </div>
+            </motion.div>
 
             <motion.h1
               variants={fadeUp} transition={{ duration: 0.6 }}
