@@ -6,4 +6,18 @@ export default defineConfig({
   server: {
     port: process.env.PORT ? parseInt(process.env.PORT) : 5173,
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          // React core — loads first, cached long-term
+          'vendor-react': ['react', 'react-dom'],
+          // Animation library — large, load separately
+          'vendor-motion': ['framer-motion'],
+          // Form validation
+          'vendor-forms': ['react-hook-form', '@hookform/resolvers', 'zod'],
+        },
+      },
+    },
+  },
 })

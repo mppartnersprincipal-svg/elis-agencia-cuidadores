@@ -20,6 +20,17 @@ function useCounter(target: number, isVisible: boolean, duration = 1500) {
   return count
 }
 
+// Extracted to own component so useCounter is not called inside a .map()
+function StatCard({ stat, isVisible }: { stat: typeof STATS[0]; isVisible: boolean }) {
+  const count = useCounter(stat.value, isVisible)
+  return (
+    <div className="card p-6 text-center">
+      <p className="font-headline text-display-lg-mobile text-primary">{count}{stat.suffix}</p>
+      <p className="text-body-md text-on-surface-variant mt-1">{stat.label}</p>
+    </div>
+  )
+}
+
 export default function Testimonials() {
   const { ref, isVisible } = useIntersectionObserver()
   const [current, setCurrent] = useState(0)
@@ -44,17 +55,11 @@ export default function Testimonials() {
   return (
     <section id="depoimentos" className="py-[80px] bg-surface" aria-labelledby="depoimentos-title">
       <div className="section-container" ref={ref}>
-        {/* Stats row */}
+        {/* Stats row — each card renders its own hook correctly */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-          {STATS.map((stat) => {
-            const count = useCounter(stat.value, isVisible)
-            return (
-              <div key={stat.label} className="card p-6 text-center">
-                <p className="font-headline text-display-lg-mobile text-primary">{count}{stat.suffix}</p>
-                <p className="text-body-md text-on-surface-variant mt-1">{stat.label}</p>
-              </div>
-            )
-          })}
+          {STATS.map((stat) => (
+            <StatCard key={stat.label} stat={stat} isVisible={isVisible} />
+          ))}
         </div>
 
         <motion.div
