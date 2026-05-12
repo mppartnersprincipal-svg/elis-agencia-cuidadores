@@ -1,28 +1,77 @@
 import { motion } from 'framer-motion'
-import { Bath, Pill, UtensilsCrossed, Building2, Gamepad2, Activity } from 'lucide-react'
+import { Bath, Pill, UtensilsCrossed, Building2, Gamepad2, Activity, ShieldCheck } from 'lucide-react'
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver'
 import { DETAILED_SERVICES } from '../lib/constants'
 
 const ICONS = { Bath, Pill, UtensilsCrossed, Building2, Gamepad2, Activity }
 
+const STATS = [
+  { value: '100%', label: 'Verificados' },
+  { value: '3%', label: 'Taxa de aprovação' },
+  { value: '24/7', label: 'Suporte clínico' },
+]
+
 export default function DetailedServices() {
   const { ref, isVisible } = useIntersectionObserver()
 
   return (
-    <section className="section-padding bg-white" aria-labelledby="servicos-detalhados-title">
-      <div className="container-max" ref={ref}>
+    <section className="py-[80px] bg-surface" aria-labelledby="servicos-detalhados-title">
+      <div className="section-container" ref={ref}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isVisible ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
+          className="text-center mb-14"
         >
-          <h2 id="servicos-detalhados-title" className="section-title">O Que Nossos Cuidadores Fazem</h2>
-          <p className="section-subtitle">
+          <h2 id="servicos-detalhados-title" className="section-title font-headline">O Que Nossos Cuidadores Fazem</h2>
+          <p className="section-subtitle mx-auto">
             Cuidado completo e integral, cobrindo todas as necessidades do dia a dia do seu familiar.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
+        {/* Bento grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* Large card — left col span 2 */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={isVisible ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5 }}
+            className="md:col-span-2 card p-8 flex flex-col justify-between"
+          >
+            <div>
+              <div className="w-12 h-12 bg-secondary/10 rounded-xl flex items-center justify-center mb-6">
+                <ShieldCheck size={24} className="text-secondary" aria-hidden="true" />
+              </div>
+              <h3 className="font-headline text-headline-sm text-on-surface mb-4">O Padrão Ouro de Seleção</h3>
+              <p className="text-body-md text-on-surface-variant mb-6">
+                Cada cuidador passa por uma verificação de múltiplas camadas, incluindo triagem federal, exames de proficiência clínica e avaliação profunda de personalidade para inteligência emocional.
+              </p>
+            </div>
+            <div className="grid grid-cols-3 gap-4 border-t border-outline-variant pt-6">
+              {STATS.map((stat) => (
+                <div key={stat.label} className="text-center">
+                  <div className="font-headline text-headline-sm text-primary">{stat.value}</div>
+                  <div className="text-caption text-outline font-label mt-1">{stat.label}</div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Dark feature card */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={isVisible ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="bg-primary text-on-primary p-8 rounded-3xl shadow-ambient flex flex-col justify-center"
+          >
+            <Gamepad2 size={36} className="mb-6 text-primary-fixed" aria-hidden="true" />
+            <h3 className="font-headline text-headline-sm mb-4 text-on-primary-container">Treinamento Contínuo</h3>
+            <p className="text-body-md opacity-90">
+              Nossa equipe completa treinamentos mensais obrigatórios: Alzheimer, recuperação pós-cirúrgica e comunicação compassiva.
+            </p>
+          </motion.div>
+
+          {/* Small service cards */}
           {DETAILED_SERVICES.map((service, i) => {
             const Icon = ICONS[service.icon as keyof typeof ICONS]
             return (
@@ -30,15 +79,15 @@ export default function DetailedServices() {
                 key={service.title}
                 initial={{ opacity: 0, y: 30 }}
                 animate={isVisible ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: i * 0.08 }}
-                className="flex gap-4 p-5 rounded-2xl bg-gray-50 hover:bg-blue-50 hover:shadow-md transition-all duration-300 group"
+                transition={{ duration: 0.5, delay: (i + 2) * 0.07 }}
+                className="card p-6 flex gap-4 items-start hover:shadow-ambient-md transition-all duration-300 group"
               >
-                <div className="flex-shrink-0 w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-sm group-hover:bg-primary group-hover:shadow-md transition-all duration-300">
-                  <Icon size={22} className="text-primary group-hover:text-white transition-colors duration-300" aria-hidden="true" />
+                <div className="flex-shrink-0 w-11 h-11 bg-surface-container-high rounded-xl flex items-center justify-center group-hover:bg-primary group-hover:shadow-sm transition-all duration-300">
+                  <Icon size={20} className="text-primary group-hover:text-on-primary transition-colors duration-300" aria-hidden="true" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-1">{service.title}</h3>
-                  <p className="text-gray-600 text-sm leading-relaxed">{service.description}</p>
+                  <h4 className="font-label text-label-md text-on-surface mb-1">{service.title}</h4>
+                  <p className="text-caption text-on-surface-variant leading-relaxed">{service.description}</p>
                 </div>
               </motion.div>
             )

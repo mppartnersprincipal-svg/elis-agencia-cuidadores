@@ -14,6 +14,12 @@ const SERVICE_OPTIONS = [
   { value: 'paliativos', label: 'Cuidados Paliativos' },
 ]
 
+const LabelText = ({ htmlFor, children }: { htmlFor: string; children: React.ReactNode }) => (
+  <label htmlFor={htmlFor} className="block font-label text-label-md text-on-surface-variant mb-1.5">
+    {children}
+  </label>
+)
+
 export default function ContactForm() {
   const [submitted, setSubmitted] = useState(false)
 
@@ -21,9 +27,7 @@ export default function ContactForm() {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<ContactFormData>({
-    resolver: zodResolver(contactSchema),
-  })
+  } = useForm<ContactFormData>({ resolver: zodResolver(contactSchema) })
 
   const onSubmit = async (data: ContactFormData) => {
     await new Promise((r) => setTimeout(r, 800))
@@ -42,10 +46,10 @@ export default function ContactForm() {
   if (submitted) {
     return (
       <div className="text-center py-12">
-        <CheckCircle size={56} className="text-secondary mx-auto mb-4" aria-hidden="true" />
-        <h3 className="text-2xl font-bold text-gray-900 mb-2">Solicitação Enviada!</h3>
-        <p className="text-gray-600 mb-6">Abrimos o WhatsApp para você. Nossa equipe responderá em até 2 horas.</p>
-        <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn-secondary">
+        <CheckCircle size={52} className="text-secondary mx-auto mb-4" aria-hidden="true" />
+        <h3 className="font-headline text-headline-sm text-on-surface mb-2">Solicitação Enviada!</h3>
+        <p className="text-body-md text-on-surface-variant mb-6">Abrimos o WhatsApp para você. Respondemos em até 2 horas.</p>
+        <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn-primary inline-flex">
           Continuar no WhatsApp
         </a>
       </div>
@@ -54,194 +58,115 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-5" aria-label="Formulário de contato">
-      {/* Row 1: Name + Phone */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1.5">
-            Nome completo <span className="text-red-500" aria-hidden="true">*</span>
-          </label>
-          <input
-            id="name"
-            type="text"
-            autoComplete="name"
-            placeholder="Seu nome completo"
+          <LabelText htmlFor="name">Nome completo <span className="text-error" aria-hidden="true">*</span></LabelText>
+          <input id="name" type="text" autoComplete="name" placeholder="Seu nome completo"
             className={`input-field ${errors.name ? 'input-error' : ''}`}
-            aria-invalid={!!errors.name}
-            aria-describedby={errors.name ? 'name-error' : undefined}
-            {...register('name')}
-          />
+            aria-invalid={!!errors.name} {...register('name')} />
           {errors.name && (
-            <p id="name-error" role="alert" className="mt-1 text-xs text-red-500 flex items-center gap-1">
-              <AlertCircle size={12} aria-hidden="true" />{errors.name.message}
+            <p role="alert" className="mt-1 text-caption text-error flex items-center gap-1">
+              <AlertCircle size={11} />{errors.name.message}
             </p>
           )}
         </div>
-
         <div>
-          <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1.5">
-            WhatsApp / Telefone <span className="text-red-500" aria-hidden="true">*</span>
-          </label>
-          <input
-            id="phone"
-            type="tel"
-            autoComplete="tel"
-            placeholder="(71) 99999-9999"
+          <LabelText htmlFor="phone">WhatsApp / Telefone <span className="text-error" aria-hidden="true">*</span></LabelText>
+          <input id="phone" type="tel" autoComplete="tel" placeholder="(71) 99999-9999"
             className={`input-field ${errors.phone ? 'input-error' : ''}`}
-            aria-invalid={!!errors.phone}
-            aria-describedby={errors.phone ? 'phone-error' : undefined}
-            {...register('phone')}
-          />
+            aria-invalid={!!errors.phone} {...register('phone')} />
           {errors.phone && (
-            <p id="phone-error" role="alert" className="mt-1 text-xs text-red-500 flex items-center gap-1">
-              <AlertCircle size={12} aria-hidden="true" />{errors.phone.message}
+            <p role="alert" className="mt-1 text-caption text-error flex items-center gap-1">
+              <AlertCircle size={11} />{errors.phone.message}
             </p>
           )}
         </div>
       </div>
 
-      {/* Email */}
       <div>
-        <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1.5">
-          E-mail <span className="text-red-500" aria-hidden="true">*</span>
-        </label>
-        <input
-          id="email"
-          type="email"
-          autoComplete="email"
-          placeholder="seu@email.com"
+        <LabelText htmlFor="email">E-mail <span className="text-error" aria-hidden="true">*</span></LabelText>
+        <input id="email" type="email" autoComplete="email" placeholder="seu@email.com"
           className={`input-field ${errors.email ? 'input-error' : ''}`}
-          aria-invalid={!!errors.email}
-          aria-describedby={errors.email ? 'email-error' : undefined}
-          {...register('email')}
-        />
+          aria-invalid={!!errors.email} {...register('email')} />
         {errors.email && (
-          <p id="email-error" role="alert" className="mt-1 text-xs text-red-500 flex items-center gap-1">
-            <AlertCircle size={12} aria-hidden="true" />{errors.email.message}
+          <p role="alert" className="mt-1 text-caption text-error flex items-center gap-1">
+            <AlertCircle size={11} />{errors.email.message}
           </p>
         )}
       </div>
 
-      {/* Row 2: Service + Neighborhood */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
-          <label htmlFor="serviceType" className="block text-sm font-medium text-gray-700 mb-1.5">
-            Tipo de serviço <span className="text-red-500" aria-hidden="true">*</span>
-          </label>
-          <select
-            id="serviceType"
-            className={`input-field ${errors.serviceType ? 'input-error' : ''}`}
-            aria-invalid={!!errors.serviceType}
-            {...register('serviceType')}
-          >
+          <LabelText htmlFor="serviceType">Tipo de serviço <span className="text-error" aria-hidden="true">*</span></LabelText>
+          <select id="serviceType" className={`input-field ${errors.serviceType ? 'input-error' : ''}`}
+            aria-invalid={!!errors.serviceType} {...register('serviceType')}>
             <option value="">Selecione...</option>
-            {SERVICE_OPTIONS.map((o) => (
-              <option key={o.value} value={o.value}>{o.label}</option>
-            ))}
+            {SERVICE_OPTIONS.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
           </select>
           {errors.serviceType && (
-            <p role="alert" className="mt-1 text-xs text-red-500 flex items-center gap-1">
-              <AlertCircle size={12} aria-hidden="true" />{errors.serviceType.message}
+            <p role="alert" className="mt-1 text-caption text-error flex items-center gap-1">
+              <AlertCircle size={11} />{errors.serviceType.message}
             </p>
           )}
         </div>
-
         <div>
-          <label htmlFor="neighborhood" className="block text-sm font-medium text-gray-700 mb-1.5">
-            Bairro / Região <span className="text-red-500" aria-hidden="true">*</span>
-          </label>
-          <select
-            id="neighborhood"
-            className={`input-field ${errors.neighborhood ? 'input-error' : ''}`}
-            aria-invalid={!!errors.neighborhood}
-            {...register('neighborhood')}
-          >
+          <LabelText htmlFor="neighborhood">Bairro / Região <span className="text-error" aria-hidden="true">*</span></LabelText>
+          <select id="neighborhood" className={`input-field ${errors.neighborhood ? 'input-error' : ''}`}
+            aria-invalid={!!errors.neighborhood} {...register('neighborhood')}>
             <option value="">Selecione...</option>
-            {SALVADOR_NEIGHBORHOODS.map((n) => (
-              <option key={n} value={n}>{n}</option>
-            ))}
+            {SALVADOR_NEIGHBORHOODS.map((n) => <option key={n} value={n}>{n}</option>)}
           </select>
           {errors.neighborhood && (
-            <p role="alert" className="mt-1 text-xs text-red-500 flex items-center gap-1">
-              <AlertCircle size={12} aria-hidden="true" />{errors.neighborhood.message}
+            <p role="alert" className="mt-1 text-caption text-error flex items-center gap-1">
+              <AlertCircle size={11} />{errors.neighborhood.message}
             </p>
           )}
         </div>
       </div>
 
-      {/* Patient Birthdate */}
       <div>
-        <label htmlFor="patientBirthdate" className="block text-sm font-medium text-gray-700 mb-1.5">
-          Data de nascimento do paciente
-        </label>
-        <input
-          id="patientBirthdate"
-          type="date"
-          className="input-field"
-          {...register('patientBirthdate')}
-        />
+        <LabelText htmlFor="patientBirthdate">Data de nascimento do paciente</LabelText>
+        <input id="patientBirthdate" type="date" className="input-field" {...register('patientBirthdate')} />
       </div>
 
-      {/* Special Needs */}
       <div>
-        <label htmlFor="specialNeeds" className="block text-sm font-medium text-gray-700 mb-1.5">
-          Necessidades especiais ou observações
-        </label>
-        <textarea
-          id="specialNeeds"
-          rows={3}
+        <LabelText htmlFor="specialNeeds">Necessidades especiais ou observações</LabelText>
+        <textarea id="specialNeeds" rows={3}
           placeholder="Descreva condições de saúde, medicamentos em uso, restrições, etc."
-          className="input-field resize-none"
-          {...register('specialNeeds')}
-        />
-        {errors.specialNeeds && (
-          <p role="alert" className="mt-1 text-xs text-red-500">{errors.specialNeeds.message}</p>
-        )}
+          className="input-field resize-none" {...register('specialNeeds')} />
       </div>
 
-      {/* Best time */}
       <div>
-        <label htmlFor="bestTime" className="block text-sm font-medium text-gray-700 mb-1.5">
-          Melhor horário para contato
-        </label>
-        <input
-          id="bestTime"
-          type="time"
-          className="input-field"
-          {...register('bestTime')}
-        />
+        <LabelText htmlFor="bestTime">Melhor horário para contato</LabelText>
+        <input id="bestTime" type="time" className="input-field" {...register('bestTime')} />
       </div>
 
-      {/* Terms */}
       <div>
-        <label className="flex items-start gap-3 cursor-pointer group">
-          <input
-            type="checkbox"
-            className="mt-1 w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary focus:ring-offset-0 cursor-pointer"
-            aria-invalid={!!errors.terms}
-            {...register('terms')}
-          />
-          <span className="text-sm text-gray-600">
+        <label className="flex items-start gap-3 cursor-pointer">
+          <input type="checkbox"
+            className="mt-0.5 w-4 h-4 text-primary border-outline-variant rounded focus:ring-primary focus:ring-offset-0 cursor-pointer accent-primary"
+            aria-invalid={!!errors.terms} {...register('terms')} />
+          <span className="text-body-md text-on-surface-variant">
             Concordo com os{' '}
-            <a href="#" className="text-primary hover:underline font-medium">Termos de Uso</a>
+            <a href="#" className="text-primary hover:underline font-semibold">Termos de Uso</a>
             {' '}e a{' '}
-            <a href="#" className="text-primary hover:underline font-medium">Política de Privacidade</a>.{' '}
-            <span className="text-red-500" aria-hidden="true">*</span>
+            <a href="#" className="text-primary hover:underline font-semibold">Política de Privacidade</a>.{' '}
+            <span className="text-error" aria-hidden="true">*</span>
           </span>
         </label>
         {errors.terms && (
-          <p role="alert" className="mt-1 text-xs text-red-500 flex items-center gap-1">
-            <AlertCircle size={12} aria-hidden="true" />{errors.terms.message}
+          <p role="alert" className="mt-1 text-caption text-error flex items-center gap-1">
+            <AlertCircle size={11} />{errors.terms.message}
           </p>
         )}
       </div>
 
-      {/* Submit */}
       <motion.button
         type="submit"
         disabled={isSubmitting}
         whileHover={{ scale: 1.01 }}
         whileTap={{ scale: 0.99 }}
-        className="w-full btn-primary py-4 text-base disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none"
+        className="w-full btn-primary py-4 disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none"
       >
         {isSubmitting ? (
           <>
@@ -253,7 +178,7 @@ export default function ContactForm() {
           </>
         ) : (
           <>
-            <Send size={18} aria-hidden="true" />
+            <Send size={17} aria-hidden="true" />
             Solicitar Avaliação Gratuita
           </>
         )}

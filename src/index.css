@@ -3,108 +3,80 @@
 @tailwind utilities;
 
 @layer base {
-  * {
-    -webkit-tap-highlight-color: transparent;
-  }
-
-  html {
-    scroll-behavior: smooth;
-  }
-
+  * { -webkit-tap-highlight-color: transparent; }
+  html { scroll-behavior: smooth; }
   body {
-    @apply font-sans text-gray-800 antialiased;
+    @apply font-sans text-body-md text-on-surface antialiased bg-background;
   }
 
   @media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
+    *, *::before, *::after {
       animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
     }
-
-    html {
-      scroll-behavior: auto;
-    }
+    html { scroll-behavior: auto; }
   }
 }
 
 @layer components {
+  /* Buttons */
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-dark text-white font-semibold px-6 py-3 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2;
+    @apply inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-container text-on-primary font-label font-semibold text-label-md px-8 py-4 rounded-full transition-all duration-200 shadow-ambient hover:shadow-ambient-md hover:-translate-y-0.5 active:translate-y-0 active:scale-95 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2;
   }
-
   .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 bg-secondary hover:bg-secondary-dark text-white font-semibold px-6 py-3 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2;
+    @apply inline-flex items-center justify-center gap-2 border-2 border-primary text-primary hover:bg-primary hover:text-on-primary font-label font-semibold text-label-md px-8 py-4 rounded-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 border border-outline-variant text-on-surface-variant hover:bg-surface-container font-label font-semibold text-label-md px-6 py-3 rounded-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2;
+  }
+  .btn-outline-white {
+    @apply inline-flex items-center justify-center gap-2 border-2 border-white/60 hover:border-white text-white hover:bg-white/10 font-label font-semibold text-label-md px-8 py-4 rounded-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white;
   }
 
-  .btn-accent {
-    @apply inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent-dark text-gray-900 font-semibold px-6 py-3 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2;
-  }
-
-  .btn-outline {
-    @apply inline-flex items-center justify-center gap-2 border-2 border-white text-white hover:bg-white hover:text-primary font-semibold px-6 py-3 rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary;
-  }
-
-  .section-padding {
-    @apply py-16 px-4 sm:px-6 lg:px-8;
-  }
-
-  .container-max {
-    @apply max-w-7xl mx-auto;
-  }
-
+  /* Cards */
   .card {
-    @apply bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1;
+    @apply bg-surface-container-lowest rounded-3xl border border-outline-variant/30 shadow-ambient hover:shadow-ambient-md transition-all duration-300;
+  }
+  .card-hover {
+    @apply card hover:-translate-y-1;
   }
 
+  /* Section layout */
+  .section-container {
+    @apply max-w-container mx-auto px-gutter;
+  }
   .section-title {
-    @apply text-3xl sm:text-4xl font-bold text-gray-900 text-center;
+    @apply font-headline text-headline-md text-on-surface;
   }
-
   .section-subtitle {
-    @apply text-lg text-gray-600 text-center mt-4 max-w-2xl mx-auto;
+    @apply text-body-lg text-on-surface-variant mt-4 max-w-2xl;
   }
 
+  /* Form inputs */
   .input-field {
-    @apply w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200 text-gray-800 placeholder-gray-400;
+    @apply w-full px-4 py-3 bg-surface-container-low border border-outline-variant rounded-xl text-on-surface text-body-md placeholder-outline focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-200;
   }
+  .input-error { @apply border-error focus:ring-error; }
 
-  .input-error {
-    @apply border-red-400 focus:ring-red-400;
+  /* Tag/badge */
+  .badge {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-label-md font-label bg-secondary-container text-on-secondary-container;
   }
-
-  .whatsapp-pulse {
-    @apply relative;
-  }
-
-  .whatsapp-pulse::before {
-    content: '';
-    @apply absolute inset-0 rounded-xl bg-green-400 animate-ping opacity-30;
+  .badge-primary {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-label-md font-label bg-primary-fixed text-primary;
   }
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+  .text-balance { text-wrap: balance; }
+  .font-headline { font-family: Montserrat, system-ui, sans-serif; }
+  .font-label    { font-family: Manrope, system-ui, sans-serif; }
 
-  .gradient-primary {
-    background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);
+  .gradient-forest {
+    background: linear-gradient(135deg, #1a3a28 0%, #2d5a3d 55%, #3b7050 100%);
   }
-
-  .gradient-hero {
-    background: linear-gradient(135deg, #1e3a8a 0%, #1D4ED8 50%, #065f46 100%);
-  }
-
-  .gradient-cta {
-    background: linear-gradient(135deg, #2563EB 0%, #10B981 100%);
-  }
-
-  .shimmer-bg {
-    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.1) 50%, transparent 100%);
-    background-size: 200% 100%;
-    animation: shimmer 2s infinite;
+  .gradient-sage {
+    background: linear-gradient(135deg, #4a7355 0%, #6b9e72 100%);
   }
 }
