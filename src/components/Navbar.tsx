@@ -1,19 +1,22 @@
 import { useState, useEffect } from 'react'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { Menu, X, Phone } from 'lucide-react'
 import { WHATSAPP_URL, PHONE_NUMBER } from '../lib/constants'
 import LogoElis from './LogoElis'
 
 const NAV_LINKS = [
-  { href: '#servicos', label: 'Serviços' },
-  { href: '#como-funciona', label: 'Como Funciona' },
-  { href: '#valores', label: 'Preços' },
-  { href: '#depoimentos', label: 'Depoimentos' },
-  { href: '#contato', label: 'Contato' },
+  { path: '/servicos', sectionId: 'servicos', label: 'Serviços' },
+  { path: '/como-funciona', sectionId: 'como-funciona', label: 'Como Funciona' },
+  { path: '/precos', sectionId: 'valores', label: 'Preços' },
+  { path: '/depoimentos', sectionId: 'depoimentos', label: 'Depoimentos' },
+  { path: '/contato', sectionId: 'contato', label: 'Contato' },
 ]
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const navigate = useNavigate()
+  const { pathname } = useLocation()
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20)
@@ -21,9 +24,18 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const handleNavClick = (href: string) => {
+  const handleNavClick = (path: string, sectionId: string) => {
     setIsOpen(false)
-    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' })
+    navigate(path)
+    setTimeout(() => {
+      document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' })
+    }, 50)
+  }
+
+  const handleLogoClick = () => {
+    setIsOpen(false)
+    navigate('/')
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   return (
@@ -34,7 +46,7 @@ export default function Navbar() {
     >
       <nav className="section-container flex items-center justify-between h-20" aria-label="Navegação principal">
         <button
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          onClick={handleLogoClick}
           className="focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-lg"
           aria-label="Início"
         >
@@ -50,11 +62,15 @@ export default function Navbar() {
         {/* Desktop nav */}
         <ul className="hidden lg:flex items-center gap-8" role="list">
           {NAV_LINKS.map((link) => (
-            <li key={link.href}>
+            <li key={link.path}>
               <button
-                onClick={() => handleNavClick(link.href)}
+                onClick={() => handleNavClick(link.path, link.sectionId)}
                 className={`font-label text-label-md transition-colors duration-200 hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded ${
-                  scrolled ? 'text-on-surface-variant' : 'text-white/90'
+                  pathname === link.path
+                    ? 'text-primary font-semibold'
+                    : scrolled
+                    ? 'text-on-surface-variant'
+                    : 'text-white/90'
                 }`}
               >
                 {link.label}
@@ -100,10 +116,14 @@ export default function Navbar() {
         <div className="lg:hidden bg-surface border-t border-outline-variant/30 shadow-ambient-md">
           <ul className="px-gutter py-4 space-y-1" role="list">
             {NAV_LINKS.map((link) => (
-              <li key={link.href}>
+              <li key={link.path}>
                 <button
-                  onClick={() => handleNavClick(link.href)}
-                  className="w-full text-left px-4 py-3 text-on-surface-variant font-label text-label-md hover:bg-surface-container hover:text-primary rounded-xl transition-colors focus:outline-none focus:ring-2 focus:ring-primary"
+                  onClick={() => handleNavClick(link.path, link.sectionId)}
+                  className={`w-full text-left px-4 py-3 font-label text-label-md rounded-xl transition-colors focus:outline-none focus:ring-2 focus:ring-primary ${
+                    pathname === link.path
+                      ? 'bg-primary/10 text-primary font-semibold'
+                      : 'text-on-surface-variant hover:bg-surface-container hover:text-primary'
+                  }`}
                 >
                   {link.label}
                 </button>

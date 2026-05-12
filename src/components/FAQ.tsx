@@ -8,7 +8,7 @@ export default function FAQ() {
   const [open, setOpen] = useState<number | null>(null)
 
   return (
-    <section className="py-[80px] bg-surface-container" aria-labelledby="faq-title">
+    <section id="faq" className="py-[80px] bg-surface-container" aria-labelledby="faq-title">
       <div className="section-container">
         <motion.div
           variants={blurIn}

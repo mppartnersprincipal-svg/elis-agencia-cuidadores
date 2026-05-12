@@ -1,3 +1,5 @@
+import { useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Differentials from './components/Differentials'
@@ -12,7 +14,31 @@ import CTAFinal from './components/CTAFinal'
 import CoverageArea from './components/CoverageArea'
 import Footer from './components/Footer'
 
+const SECTION_MAP: Record<string, string> = {
+  '/servicos': 'servicos',
+  '/como-funciona': 'como-funciona',
+  '/precos': 'valores',
+  '/depoimentos': 'depoimentos',
+  '/faq': 'faq',
+  '/contato': 'contato',
+  '/diferenciais': 'diferenciais',
+}
+
 export default function App() {
+  const { pathname } = useLocation()
+
+  useEffect(() => {
+    const sectionId = SECTION_MAP[pathname]
+    if (!sectionId) {
+      if (pathname === '/') window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior })
+      return
+    }
+    const el = document.getElementById(sectionId)
+    if (!el) return
+    const timer = setTimeout(() => el.scrollIntoView({ behavior: 'smooth' }), 150)
+    return () => clearTimeout(timer)
+  }, [pathname])
+
   return (
     <>
       <Navbar />
