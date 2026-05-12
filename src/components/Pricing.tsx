@@ -1,18 +1,17 @@
 import { motion } from 'framer-motion'
 import { Check, Star, MessageCircle } from 'lucide-react'
-import { useIntersectionObserver } from '../hooks/useIntersectionObserver'
+import { fadeUp, flipUp, blurIn, staggerContainer, viewport } from '../lib/animations'
 import { PRICING, WHATSAPP_URL } from '../lib/constants'
 
 export default function Pricing() {
-  const { ref, isVisible } = useIntersectionObserver()
-
   return (
     <section id="valores" className="py-[80px] bg-surface-container-low" aria-labelledby="valores-title">
-      <div className="section-container" ref={ref}>
+      <div className="section-container">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          variants={blurIn}
+          initial="hidden"
+          whileInView="show"
+          viewport={viewport}
           className="text-center mb-14"
         >
           <h2 id="valores-title" className="section-title font-headline">Escolha o Plano Certo para Seu Familiar</h2>
@@ -21,11 +20,11 @@ export default function Pricing() {
           </p>
         </motion.div>
 
-        {/* Banner */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.15 }}
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="show"
+          viewport={viewport}
           className="mb-8 bg-primary-fixed border border-primary/20 rounded-2xl p-5 flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left"
         >
           <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center flex-shrink-0">
@@ -37,13 +36,17 @@ export default function Pricing() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {PRICING.map((plan, i) => (
+        <motion.div
+          variants={staggerContainer(0.12)}
+          initial="hidden"
+          whileInView="show"
+          viewport={viewport}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+        >
+          {PRICING.map((plan) => (
             <motion.div
               key={plan.hours}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isVisible ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
+              variants={flipUp}
               className={`relative rounded-3xl p-6 flex flex-col border transition-all duration-300 ${
                 plan.popular
                   ? 'bg-primary border-primary text-on-primary shadow-ambient-md scale-105 z-10'
@@ -73,11 +76,7 @@ export default function Pricing() {
               <ul className="space-y-2.5 flex-1 mb-6" role="list">
                 {plan.features.map((feature) => (
                   <li key={feature} className="flex items-start gap-2.5 text-body-md">
-                    <Check
-                      size={14}
-                      className={`flex-shrink-0 mt-0.5 ${plan.popular ? 'text-secondary-fixed' : 'text-secondary'}`}
-                      aria-hidden="true"
-                    />
+                    <Check size={14} className={`flex-shrink-0 mt-0.5 ${plan.popular ? 'text-secondary-fixed' : 'text-secondary'}`} aria-hidden="true" />
                     <span className={plan.popular ? 'text-on-primary-container' : 'text-on-surface-variant'}>{feature}</span>
                   </li>
                 ))}
@@ -97,12 +96,13 @@ export default function Pricing() {
               </a>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         <motion.p
           initial={{ opacity: 0 }}
-          animate={isVisible ? { opacity: 1 } : {}}
-          transition={{ duration: 0.6, delay: 0.5 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          viewport={{ once: true }}
           className="text-center text-caption text-outline mt-6"
         >
           * Pagamento antecipado. Valores ajustados conforme especificidades do paciente.

@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { MapPin } from 'lucide-react'
-import { useIntersectionObserver } from '../hooks/useIntersectionObserver'
+import { fadeLeft, fadeRight, blurIn, staggerContainer, viewport } from '../lib/animations'
 import { WHATSAPP_URL } from '../lib/constants'
 
 const NEIGHBORHOODS = [
@@ -22,19 +22,14 @@ const SERVICES_KEYWORDS = [
 ]
 
 export default function CoverageArea() {
-  const { ref, isVisible } = useIntersectionObserver()
-
   return (
-    <section
-      className="py-[80px] bg-surface-container"
-      aria-labelledby="cobertura-title"
-      ref={ref}
-    >
+    <section className="py-[80px] bg-surface-container" aria-labelledby="cobertura-title">
       <div className="section-container">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          variants={blurIn}
+          initial="hidden"
+          whileInView="show"
+          viewport={viewport}
           className="text-center mb-12"
         >
           <div className="inline-flex items-center gap-2 badge mb-4">
@@ -51,43 +46,67 @@ export default function CoverageArea() {
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Neighborhoods */}
+          {/* Neighborhoods — tags pop in */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={isVisible ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.1 }}
+            variants={fadeLeft}
+            initial="hidden"
+            whileInView="show"
+            viewport={viewport}
           >
             <h3 className="font-label text-label-md text-primary font-semibold mb-5 flex items-center gap-2">
               <MapPin size={16} />
               Bairros Atendidos em Salvador
             </h3>
-            <div className="flex flex-wrap gap-2">
+            <motion.div
+              variants={staggerContainer(0.04)}
+              initial="hidden"
+              whileInView="show"
+              viewport={viewport}
+              className="flex flex-wrap gap-2"
+            >
               {NEIGHBORHOODS.map((bairro) => (
-                <span
+                <motion.span
                   key={bairro}
+                  variants={{
+                    hidden: { opacity: 0, scale: 0.7, y: 8 },
+                    show: { opacity: 1, scale: 1, y: 0, transition: { type: 'spring', stiffness: 300, damping: 22 } },
+                  }}
                   className="px-3 py-1.5 bg-surface-container-lowest border border-outline-variant/40 rounded-full text-body-md text-on-surface-variant hover:border-primary hover:text-primary transition-colors cursor-default"
                 >
                   {bairro}
-                </span>
+                </motion.span>
               ))}
-            </div>
+            </motion.div>
             <p className="text-caption text-outline mt-4">
               Não encontrou seu bairro? Entre em contato — provavelmente atendemos sua região.
             </p>
           </motion.div>
 
-          {/* Services list */}
+          {/* Services — slide from right */}
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={isVisible ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            variants={fadeRight}
+            initial="hidden"
+            whileInView="show"
+            viewport={viewport}
           >
             <h3 className="font-label text-label-md text-primary font-semibold mb-5">
               Serviços de Home Care em Salvador
             </h3>
-            <ul className="space-y-3">
+            <motion.ul
+              variants={staggerContainer(0.06)}
+              initial="hidden"
+              whileInView="show"
+              viewport={viewport}
+              className="space-y-3"
+            >
               {SERVICES_KEYWORDS.map((s) => (
-                <li key={s.label}>
+                <motion.li
+                  key={s.label}
+                  variants={{
+                    hidden: { opacity: 0, x: 24 },
+                    show: { opacity: 1, x: 0, transition: { duration: 0.4, ease: 'easeOut' } },
+                  }}
+                >
                   <a
                     href={s.href}
                     onClick={(e) => {
@@ -99,18 +118,20 @@ export default function CoverageArea() {
                     <span className="w-1.5 h-1.5 rounded-full bg-secondary group-hover:bg-primary transition-colors flex-shrink-0" />
                     <span className="text-body-md">{s.label} em Salvador, BA</span>
                   </a>
-                </li>
+                </motion.li>
               ))}
-            </ul>
+            </motion.ul>
 
-            <a
+            <motion.a
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 mt-8 btn-primary"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
             >
               Verificar atendimento no meu bairro
-            </a>
+            </motion.a>
           </motion.div>
         </div>
       </div>

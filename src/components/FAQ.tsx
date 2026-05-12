@@ -1,20 +1,20 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Plus, Minus } from 'lucide-react'
-import { useIntersectionObserver } from '../hooks/useIntersectionObserver'
+import { fadeLeft, blurIn, staggerContainer, viewport } from '../lib/animations'
 import { FAQ_ITEMS } from '../lib/constants'
 
 export default function FAQ() {
-  const { ref, isVisible } = useIntersectionObserver()
   const [open, setOpen] = useState<number | null>(null)
 
   return (
     <section className="py-[80px] bg-surface-container" aria-labelledby="faq-title">
-      <div className="section-container" ref={ref}>
+      <div className="section-container">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          variants={blurIn}
+          initial="hidden"
+          whileInView="show"
+          viewport={viewport}
           className="text-center mb-12"
         >
           <h2 id="faq-title" className="section-title font-headline">Perguntas que toda família faz</h2>
@@ -23,13 +23,17 @@ export default function FAQ() {
           </p>
         </motion.div>
 
-        <div className="max-w-3xl mx-auto space-y-3">
+        <motion.div
+          variants={staggerContainer(0.07)}
+          initial="hidden"
+          whileInView="show"
+          viewport={viewport}
+          className="max-w-3xl mx-auto space-y-3"
+        >
           {FAQ_ITEMS.map((item, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 15 }}
-              animate={isVisible ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.4, delay: i * 0.05 }}
+              variants={fadeLeft}
               className={`bg-surface-container-lowest rounded-2xl border transition-all duration-200 ${
                 open === i ? 'border-primary/30 shadow-ambient' : 'border-outline-variant/30 hover:border-outline-variant'
               }`}
@@ -40,11 +44,14 @@ export default function FAQ() {
                 aria-expanded={open === i}
               >
                 <span className="font-label text-label-md text-on-surface">{item.question}</span>
-                <span className={`flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-colors duration-200 ${
-                  open === i ? 'bg-primary text-on-primary' : 'bg-surface-container text-on-surface-variant'
-                }`}>
+                <motion.span
+                  animate={{ rotate: open === i ? 0 : 0 }}
+                  className={`flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-colors duration-200 ${
+                    open === i ? 'bg-primary text-on-primary' : 'bg-surface-container text-on-surface-variant'
+                  }`}
+                >
                   {open === i ? <Minus size={14} aria-hidden="true" /> : <Plus size={14} aria-hidden="true" />}
-                </span>
+                </motion.span>
               </button>
 
               <AnimatePresence initial={false}>
@@ -64,7 +71,7 @@ export default function FAQ() {
               </AnimatePresence>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   )

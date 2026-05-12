@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { Bath, Pill, UtensilsCrossed, Building2, Gamepad2, Activity, ShieldCheck } from 'lucide-react'
-import { useIntersectionObserver } from '../hooks/useIntersectionObserver'
+import { fadeLeft, fadeRight, popIn, blurIn, staggerContainer, viewport } from '../lib/animations'
 import { DETAILED_SERVICES } from '../lib/constants'
 
 const ICONS = { Bath, Pill, UtensilsCrossed, Building2, Gamepad2, Activity }
@@ -12,15 +12,14 @@ const STATS = [
 ]
 
 export default function DetailedServices() {
-  const { ref, isVisible } = useIntersectionObserver()
-
   return (
     <section className="py-[80px] bg-surface" aria-labelledby="servicos-detalhados-title">
-      <div className="section-container" ref={ref}>
+      <div className="section-container">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          variants={blurIn}
+          initial="hidden"
+          whileInView="show"
+          viewport={viewport}
           className="text-center mb-14"
         >
           <h2 id="servicos-detalhados-title" className="section-title font-headline">Cuidado Completo, Dia a Dia</h2>
@@ -29,13 +28,13 @@ export default function DetailedServices() {
           </p>
         </motion.div>
 
-        {/* Bento grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* Large card — left col span 2 */}
+          {/* Large card — slides from left */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isVisible ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5 }}
+            variants={fadeLeft}
+            initial="hidden"
+            whileInView="show"
+            viewport={viewport}
             className="md:col-span-2 card p-8 flex flex-col justify-between"
           >
             <div>
@@ -48,20 +47,28 @@ export default function DetailedServices() {
               </p>
             </div>
             <div className="grid grid-cols-3 gap-4 border-t border-outline-variant pt-6">
-              {STATS.map((stat) => (
-                <div key={stat.label} className="text-center">
+              {STATS.map((stat, i) => (
+                <motion.div
+                  key={stat.label}
+                  className="text-center"
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: i * 0.1 }}
+                  viewport={{ once: true }}
+                >
                   <div className="font-headline text-headline-sm text-primary">{stat.value}</div>
                   <div className="text-caption text-outline font-label mt-1">{stat.label}</div>
-                </div>
+                </motion.div>
               ))}
             </div>
           </motion.div>
 
-          {/* Dark feature card */}
+          {/* Dark card — slides from right */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isVisible ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.1 }}
+            variants={fadeRight}
+            initial="hidden"
+            whileInView="show"
+            viewport={viewport}
             className="bg-primary text-on-primary p-8 rounded-3xl shadow-ambient flex flex-col justify-center"
           >
             <Gamepad2 size={36} className="mb-6 text-primary-fixed" aria-hidden="true" />
@@ -71,27 +78,33 @@ export default function DetailedServices() {
             </p>
           </motion.div>
 
-          {/* Small service cards */}
-          {DETAILED_SERVICES.map((service, i) => {
-            const Icon = ICONS[service.icon as keyof typeof ICONS]
-            return (
-              <motion.div
-                key={service.title}
-                initial={{ opacity: 0, y: 30 }}
-                animate={isVisible ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: (i + 2) * 0.07 }}
-                className="card p-6 flex gap-4 items-start hover:shadow-ambient-md transition-all duration-300 group"
-              >
-                <div className="flex-shrink-0 w-11 h-11 bg-surface-container-high rounded-xl flex items-center justify-center group-hover:bg-primary group-hover:shadow-sm transition-all duration-300">
-                  <Icon size={20} className="text-primary group-hover:text-on-primary transition-colors duration-300" aria-hidden="true" />
-                </div>
-                <div>
-                  <h4 className="font-label text-label-md text-on-surface mb-1">{service.title}</h4>
-                  <p className="text-caption text-on-surface-variant leading-relaxed">{service.description}</p>
-                </div>
-              </motion.div>
-            )
-          })}
+          {/* Small service cards — pop in with stagger */}
+          <motion.div
+            variants={staggerContainer(0.08)}
+            initial="hidden"
+            whileInView="show"
+            viewport={viewport}
+            className="md:col-span-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
+            {DETAILED_SERVICES.map((service) => {
+              const Icon = ICONS[service.icon as keyof typeof ICONS]
+              return (
+                <motion.div
+                  key={service.title}
+                  variants={popIn}
+                  className="card p-6 flex gap-4 items-start hover:shadow-ambient-md transition-all duration-300 group"
+                >
+                  <div className="flex-shrink-0 w-11 h-11 bg-surface-container-high rounded-xl flex items-center justify-center group-hover:bg-primary group-hover:shadow-sm transition-all duration-300">
+                    <Icon size={20} className="text-primary group-hover:text-on-primary transition-colors duration-300" aria-hidden="true" />
+                  </div>
+                  <div>
+                    <h4 className="font-label text-label-md text-on-surface mb-1">{service.title}</h4>
+                    <p className="text-caption text-on-surface-variant leading-relaxed">{service.description}</p>
+                  </div>
+                </motion.div>
+              )
+            })}
+          </motion.div>
         </div>
       </div>
     </section>

@@ -1,20 +1,20 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Check, ChevronDown, ChevronUp } from 'lucide-react'
-import { useIntersectionObserver } from '../hooks/useIntersectionObserver'
+import { scaleUp, blurIn, staggerContainer, viewport } from '../lib/animations'
 import { SERVICES, WHATSAPP_URL } from '../lib/constants'
 
 export default function Services() {
-  const { ref, isVisible } = useIntersectionObserver()
   const [expanded, setExpanded] = useState<number | null>(null)
 
   return (
     <section id="servicos" className="py-[80px] bg-surface" aria-labelledby="servicos-title">
-      <div className="section-container" ref={ref}>
+      <div className="section-container">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          variants={blurIn}
+          initial="hidden"
+          whileInView="show"
+          viewport={viewport}
           className="mb-14"
         >
           <h2 id="servicos-title" className="section-title font-headline">Encontre o Cuidado Certo para Seu Familiar</h2>
@@ -23,21 +23,27 @@ export default function Services() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <motion.div
+          variants={staggerContainer(0.1)}
+          initial="hidden"
+          whileInView="show"
+          viewport={viewport}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+        >
           {SERVICES.map((service, i) => (
             <motion.article
               key={service.title}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isVisible ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
+              variants={scaleUp}
               className="card overflow-hidden hover:-translate-y-1 transition-all duration-300"
             >
               <div className="relative h-52 overflow-hidden">
-                <img
+                <motion.img
                   src={service.image}
                   alt={service.imageAlt}
                   loading="lazy"
-                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                  className="w-full h-full object-cover"
+                  whileHover={{ scale: 1.07 }}
+                  transition={{ duration: 0.5, ease: 'easeOut' }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-on-surface/50 to-transparent" />
               </div>
@@ -45,7 +51,6 @@ export default function Services() {
               <div className="p-6">
                 <h3 className="font-headline text-headline-sm text-on-surface mb-2">{service.title}</h3>
                 <p className="text-body-md text-on-surface-variant leading-relaxed mb-4">{service.description}</p>
-
                 <button
                   onClick={() => setExpanded(expanded === i ? null : i)}
                   className="flex items-center justify-between w-full text-primary font-label text-label-md hover:text-primary-container transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 rounded"
@@ -85,7 +90,7 @@ export default function Services() {
               </div>
             </motion.article>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   )

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import { Star, ChevronLeft, ChevronRight, Quote } from 'lucide-react'
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver'
+import { scaleUp, fadeUp, blurIn, staggerContainer, viewport } from '../lib/animations'
 import { TESTIMONIALS, STATS } from '../lib/constants'
 
 function useCounter(target: number, isVisible: boolean, duration = 1500) {
@@ -24,10 +25,10 @@ function useCounter(target: number, isVisible: boolean, duration = 1500) {
 function StatCard({ stat, isVisible }: { stat: typeof STATS[0]; isVisible: boolean }) {
   const count = useCounter(stat.value, isVisible)
   return (
-    <div className="card p-6 text-center">
+    <motion.div variants={scaleUp} className="card p-6 text-center">
       <p className="font-headline text-display-lg-mobile text-primary">{count}{stat.suffix}</p>
       <p className="text-body-md text-on-surface-variant mt-1">{stat.label}</p>
-    </div>
+    </motion.div>
   )
 }
 
@@ -56,16 +57,23 @@ export default function Testimonials() {
     <section id="depoimentos" className="py-[80px] bg-surface" aria-labelledby="depoimentos-title">
       <div className="section-container" ref={ref}>
         {/* Stats row — each card renders its own hook correctly */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+        <motion.div
+          variants={staggerContainer(0.1)}
+          initial="hidden"
+          whileInView="show"
+          viewport={viewport}
+          className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-16"
+        >
           {STATS.map((stat) => (
             <StatCard key={stat.label} stat={stat} isVisible={isVisible} />
           ))}
-        </div>
+        </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          variants={blurIn}
+          initial="hidden"
+          whileInView="show"
+          viewport={viewport}
           className="flex flex-col md:flex-row justify-between items-end mb-10 gap-6"
         >
           <div>
@@ -90,7 +98,13 @@ export default function Testimonials() {
           </div>
         </motion.div>
 
-        <div className="max-w-3xl">
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="show"
+          viewport={viewport}
+          className="max-w-3xl"
+        >
           <motion.div
             key={current}
             initial={{ opacity: 0, x: 32 }}
@@ -135,7 +149,7 @@ export default function Testimonials() {
               />
             ))}
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   )

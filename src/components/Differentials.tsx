@@ -1,52 +1,23 @@
 import { motion } from 'framer-motion'
 import { Shield, Clock, Home, Heart } from 'lucide-react'
-import { useIntersectionObserver } from '../hooks/useIntersectionObserver'
+import { fadeLeft, fadeRight, fadeUp, blurIn, staggerContainer, viewport } from '../lib/animations'
 
 const STEPS = [
-  {
-    icon: Shield,
-    step: '01',
-    title: 'Profissionais Certificados',
-    description: 'Todos os cuidadores passam por rigorosa seleção, verificação de antecedentes e treinamento especializado.',
-    iconBg: 'bg-primary-fixed',
-    iconColor: 'text-primary',
-  },
-  {
-    icon: Clock,
-    step: '02',
-    title: 'Disponibilidade 24/7',
-    description: 'Atendimento ininterrupto, todos os dias da semana, incluindo feriados e finais de semana.',
-    iconBg: 'bg-secondary-container',
-    iconColor: 'text-secondary',
-  },
-  {
-    icon: Home,
-    step: '03',
-    title: 'Avaliação Gratuita',
-    description: 'Realizamos visita domiciliar sem custo para entender as necessidades específicas do seu familiar.',
-    iconBg: 'bg-primary-fixed',
-    iconColor: 'text-primary',
-  },
-  {
-    icon: Heart,
-    step: '04',
-    title: 'Cuidados Paliativos',
-    description: 'Equipe especializada em conforto e qualidade de vida para pacientes em cuidados paliativos.',
-    iconBg: 'bg-secondary-container',
-    iconColor: 'text-secondary',
-  },
+  { icon: Shield, step: '01', title: 'Você conhece o cuidador antes', description: 'Apresentamos o profissional para aprovação da família antes do primeiro dia. Não gostou? Trocamos sem burocracia.', iconBg: 'bg-primary-fixed', iconColor: 'text-primary', anim: fadeLeft },
+  { icon: Clock,  step: '02', title: 'Resposta em até 2 horas',       description: 'Domingo às 22h ou feriado: nossa equipe responde. Urgência não espera horário comercial.',                              iconBg: 'bg-secondary-container', iconColor: 'text-secondary', anim: fadeUp },
+  { icon: Home,   step: '03', title: 'A avaliação vai até você',       description: 'Um profissional visita sua casa gratuitamente para entender a rotina do seu familiar — sem compromisso de contratar.', iconBg: 'bg-primary-fixed', iconColor: 'text-primary', anim: fadeUp },
+  { icon: Heart,  step: '04', title: 'Cuidado especializado em Alzheimer e paliativos', description: 'Profissionais com treinamento específico para as condições mais delicadas — porque cuidar da pessoa certa exige preparo.', iconBg: 'bg-secondary-container', iconColor: 'text-secondary', anim: fadeRight },
 ]
 
 export default function Differentials() {
-  const { ref, isVisible } = useIntersectionObserver()
-
   return (
     <section id="diferenciais" className="py-[80px] bg-surface-container-low" aria-labelledby="diferenciais-title">
-      <div className="section-container" ref={ref}>
+      <div className="section-container">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          variants={blurIn}
+          initial="hidden"
+          whileInView="show"
+          viewport={viewport}
           className="text-center mb-14"
         >
           <h2 id="diferenciais-title" className="section-title font-headline">Por Que Mais de 200 Famílias Confiam na Elis</h2>
@@ -55,15 +26,19 @@ export default function Differentials() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {STEPS.map((item, i) => {
+        <motion.div
+          variants={staggerContainer(0.13)}
+          initial="hidden"
+          whileInView="show"
+          viewport={viewport}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+        >
+          {STEPS.map((item) => {
             const Icon = item.icon
             return (
               <motion.div
                 key={item.title}
-                initial={{ opacity: 0, y: 30 }}
-                animate={isVisible ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
+                variants={item.anim}
                 className="card p-8 flex flex-col items-start hover:shadow-ambient-md transition-all duration-300 group"
               >
                 <div className={`w-12 h-12 ${item.iconBg} rounded-full flex items-center justify-center mb-6 ${item.iconColor} group-hover:scale-110 transition-transform duration-300`}>
@@ -75,7 +50,7 @@ export default function Differentials() {
               </motion.div>
             )
           })}
-        </div>
+        </motion.div>
       </div>
     </section>
   )

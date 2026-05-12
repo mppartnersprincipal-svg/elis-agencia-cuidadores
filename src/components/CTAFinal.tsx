@@ -1,17 +1,25 @@
 import { motion } from 'framer-motion'
 import { Phone } from 'lucide-react'
-import { useIntersectionObserver } from '../hooks/useIntersectionObserver'
+import { scaleUp, blurIn, popIn, staggerContainer, viewport } from '../lib/animations'
 import { WHATSAPP_URL, PHONE_NUMBER } from '../lib/constants'
 
-export default function CTAFinal() {
-  const { ref, isVisible } = useIntersectionObserver()
+const TRUST_BADGES = [
+  'Avaliação domiciliar gratuita',
+  'Resposta em até 2h',
+  'Você aprova o cuidador',
+  'Sem fidelidade mínima',
+]
 
+export default function CTAFinal() {
   return (
     <section className="py-[80px] bg-surface-container-low" aria-labelledby="cta-title">
       <div className="section-container">
-        <div
+        <motion.div
+          variants={scaleUp}
+          initial="hidden"
+          whileInView="show"
+          viewport={viewport}
           className="bg-primary-container rounded-[3rem] p-12 text-center text-on-primary-container relative overflow-hidden shadow-ambient-md"
-          ref={ref}
         >
           {/* Decorative blobs */}
           <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-primary rounded-full blur-3xl opacity-30 pointer-events-none" aria-hidden="true" />
@@ -19,9 +27,10 @@ export default function CTAFinal() {
 
           <div className="relative z-10">
             <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              animate={isVisible ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6 }}
+              variants={blurIn}
+              initial="hidden"
+              whileInView="show"
+              viewport={viewport}
             >
               <span className="inline-block bg-white/20 backdrop-blur-sm px-4 py-1.5 rounded-full font-label text-label-md mb-6">
                 Sem compromisso — avaliação gratuita
@@ -67,17 +76,23 @@ export default function CTAFinal() {
                 </a>
               </div>
 
-              <div className="flex flex-wrap justify-center gap-4 text-caption text-on-primary-container/70 font-label">
-                {['Avaliação domiciliar gratuita', 'Resposta em até 2h', 'Você aprova o cuidador', 'Sem fidelidade mínima'].map((badge) => (
-                  <span key={badge} className="flex items-center gap-1.5">
+              <motion.div
+                variants={staggerContainer(0.08)}
+                initial="hidden"
+                whileInView="show"
+                viewport={viewport}
+                className="flex flex-wrap justify-center gap-4 text-caption text-on-primary-container/70 font-label"
+              >
+                {TRUST_BADGES.map((badge) => (
+                  <motion.span key={badge} variants={popIn} className="flex items-center gap-1.5">
                     <span className="w-1 h-1 rounded-full bg-secondary-fixed inline-block" aria-hidden="true" />
                     {badge}
-                  </span>
+                  </motion.span>
                 ))}
-              </div>
+              </motion.div>
             </motion.div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   )
