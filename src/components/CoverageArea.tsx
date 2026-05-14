@@ -3,11 +3,14 @@ import { MapPin } from 'lucide-react'
 import { fadeLeft, fadeRight, blurIn, staggerContainer, viewport } from '../lib/animations'
 import { WHATSAPP_URL } from '../lib/constants'
 
-const NEIGHBORHOODS = [
-  'Pituba', 'Barra', 'Graça', 'Vitória', 'Itaigara', 'Ondina',
-  'Rio Vermelho', 'Caminho das Árvores', 'Imbuí', 'Brotas',
-  'Nazaré', 'Federação', 'Canela', 'Garcia', 'Paralela',
-  'Patamares', 'Piatã', 'Stella Maris', 'Lauro de Freitas',
+const METRO_CITIES = [
+  'Lauro de Freitas',
+  'Camaçari',
+  'Abrantes',
+  'Jauá',
+  'Arembepe',
+  'Orla de Camaçari',
+  'Simões Filho',
 ]
 
 const SERVICES_KEYWORDS = [
@@ -53,33 +56,39 @@ export default function CoverageArea() {
             whileInView="show"
             viewport={viewport}
           >
-            <h3 className="font-label text-label-md text-primary font-semibold mb-5 flex items-center gap-2">
-              <MapPin size={16} />
-              Bairros Atendidos em Salvador
-            </h3>
-            <motion.div
-              variants={staggerContainer(0.04)}
-              initial="hidden"
-              whileInView="show"
-              viewport={viewport}
-              className="flex flex-wrap gap-2"
-            >
-              {NEIGHBORHOODS.map((bairro) => (
-                <motion.span
-                  key={bairro}
-                  variants={{
-                    hidden: { opacity: 0, scale: 0.7, y: 8 },
-                    show: { opacity: 1, scale: 1, y: 0, transition: { type: 'spring', stiffness: 300, damping: 22 } },
-                  }}
-                  className="px-3 py-1.5 bg-surface-container-lowest border border-outline-variant/40 rounded-full text-body-md text-on-surface-variant hover:border-primary hover:text-primary transition-colors cursor-default"
-                >
-                  {bairro}
-                </motion.span>
-              ))}
-            </motion.div>
-            <p className="text-caption text-outline mt-4">
-              Não encontrou seu bairro? Entre em contato — provavelmente atendemos sua região.
-            </p>
+            <div>
+              <h3 className="font-label text-label-md text-primary font-semibold mb-3 flex items-center gap-2">
+                <MapPin size={16} />
+                Salvador
+              </h3>
+              <p className="text-body-md text-on-surface-variant mb-6">
+                Atendemos toda a cidade de Salvador — todos os bairros e regiões, sem exceção.
+              </p>
+
+              <h3 className="font-label text-label-md text-primary font-semibold mb-4">
+                Região Metropolitana
+              </h3>
+              <motion.div
+                variants={staggerContainer(0.04)}
+                initial="hidden"
+                whileInView="show"
+                viewport={viewport}
+                className="flex flex-wrap gap-2"
+              >
+                {METRO_CITIES.map((cidade) => (
+                  <motion.span
+                    key={cidade}
+                    variants={{
+                      hidden: { opacity: 0, scale: 0.7, y: 8 },
+                      show: { opacity: 1, scale: 1, y: 0, transition: { type: 'spring', stiffness: 300, damping: 22 } },
+                    }}
+                    className="px-3 py-1.5 bg-surface-container-lowest border border-outline-variant/40 rounded-full text-body-md text-on-surface-variant hover:border-primary hover:text-primary transition-colors cursor-default"
+                  >
+                    {cidade}
+                  </motion.span>
+                ))}
+              </motion.div>
+            </div>
           </motion.div>
 
           {/* Services — slide from right */}
@@ -130,7 +139,7 @@ export default function CoverageArea() {
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
             >
-              Verificar atendimento no meu bairro
+              Verificar atendimento na minha cidade
             </motion.a>
           </motion.div>
         </div>

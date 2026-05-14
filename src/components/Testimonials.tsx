@@ -26,7 +26,9 @@ function StatCard({ stat, isVisible }: { stat: typeof STATS[0]; isVisible: boole
   const count = useCounter(stat.value, isVisible)
   return (
     <motion.div variants={scaleUp} className="card p-6 text-center">
-      <p className="font-headline text-display-lg-mobile text-primary">{count}{stat.suffix}</p>
+      <p className="font-headline text-display-lg-mobile text-primary">
+        {stat.display ?? `${count}${stat.suffix}`}
+      </p>
       <p className="text-body-md text-on-surface-variant mt-1">{stat.label}</p>
     </motion.div>
   )

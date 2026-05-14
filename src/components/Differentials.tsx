@@ -20,7 +20,7 @@ export default function Differentials() {
           viewport={viewport}
           className="text-center mb-14"
         >
-          <h2 id="diferenciais-title" className="section-title font-headline">Por Que Mais de 200 Famílias Confiam na Elis</h2>
+          <h2 id="diferenciais-title" className="section-title font-headline">Por Que Salvador Confia na Elis</h2>
           <p className="section-subtitle mx-auto">
             Qualquer agência diz que tem bons profissionais. Veja o que nos faz diferentes na prática.
           </p>

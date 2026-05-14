@@ -3,9 +3,9 @@ export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=Ol%C3%A1!%20G
 export const INSTAGRAM_URL = 'https://instagram.com/elisagenciacuidadores'
 export const PHONE_NUMBER = '(71) 99978-3417'
 
-export const STATS = [
-  { value: 200, suffix: '+', label: 'Famílias atendidas em Salvador' },
-  { value: 5, suffix: '+', label: 'Anos cuidando com excelência' },
+export const STATS: Array<{ value: number; suffix: string; label: string; display?: string }> = [
+  { value: 0, suffix: '', label: 'e Região Metropolitana', display: 'Salvador' },
+  { value: 2, suffix: 'h', label: 'Resposta garantida' },
   { value: 98, suffix: '%', label: 'Famílias satisfeitas' },
   { value: 50, suffix: '+', label: 'Cuidadores certificados' },
 ]

@@ -59,7 +59,7 @@ export default function Hero() {
                     <Star key={i} size={11} className="fill-secondary-fixed text-secondary-fixed" aria-hidden="true" />
                   ))}
                 </div>
-                <span>+200 famílias em Salvador</span>
+                <span>Famílias atendidas em Salvador</span>
               </div>
             </motion.div>
 
@@ -121,8 +121,8 @@ export default function Hero() {
             </div>
             {/* Floating stat card */}
             <div className="absolute -bottom-6 -left-6 bg-surface-container-lowest rounded-2xl p-4 shadow-ambient-md border border-outline-variant/20">
-              <p className="font-headline text-2xl font-bold text-primary">200+</p>
-              <p className="text-caption text-on-surface-variant font-label mt-0.5">Famílias atendidas</p>
+              <p className="font-headline text-2xl font-bold text-primary">24h</p>
+              <p className="text-caption text-on-surface-variant font-label mt-0.5">Suporte contínuo</p>
             </div>
           </motion.div>
         </div>
