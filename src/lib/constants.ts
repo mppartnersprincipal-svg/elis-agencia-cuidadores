@@ -189,6 +189,20 @@ export const TESTIMONIALS = [
     text: 'Minha vó ficou encantada com a cuidadora. Além do cuidado físico, ela traz alegria e companhia. Consigo trabalhar tranquila sabendo que ela está em boas mãos.',
     avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=80',
   },
+  {
+    name: 'Izildinha Almeida',
+    role: 'Família atendida',
+    rating: 5,
+    text: 'Tenho muito a agradecer a Agência de cuidadores Elis pelo atendimento impecável. O cuidado, o carinho e o profissionalismo de vocês fazem toda a diferença na nossa rotina. Parabéns pelo serviço de extrema qualidade!',
+    avatar: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=100&q=80',
+  },
+  {
+    name: 'Família Silva',
+    role: 'Família atendida',
+    rating: 5,
+    text: 'Cuidar de quem amamos exige confiança. Por isso, a família Silva agradece de coração a Agência de cuidadores Elis pelo suporte maravilhoso. Cuidadores atenciosos, pontuais e extremamente preparados. Um serviço de qualidade que transforma vidas!',
+    avatar: 'https://images.unsplash.com/photo-1581579438747-104c53e7a48b?w=100&q=80',
+  },
 ]
 
 export const FAQ_ITEMS = [
