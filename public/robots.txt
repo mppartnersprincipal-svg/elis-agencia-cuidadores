@@ -1,0 +1,27 @@
+User-agent: *
+Allow: /
+
+# Block utility paths
+Disallow: /assets/
+Disallow: /api/
+
+# AI crawlers — explicit allow
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+Sitemap: https://elisagenciacuidadores.com.br/sitemap.xml

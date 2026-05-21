@@ -5,6 +5,27 @@ import { useIntersectionObserver } from '../hooks/useIntersectionObserver'
 import { scaleUp, fadeUp, blurIn, staggerContainer, viewport } from '../lib/animations'
 import { TESTIMONIALS, STATS } from '../lib/constants'
 
+const AVATAR_PALETTE = [
+  'bg-primary text-on-primary',
+  'bg-secondary text-on-secondary',
+  'bg-primary-container text-on-primary-container',
+  'bg-secondary-container text-on-secondary-container',
+]
+
+function getInitials(name: string) {
+  return name
+    .split(' ')
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((p) => p[0]?.toUpperCase() ?? '')
+    .join('')
+}
+
+function getAvatarColor(name: string) {
+  const sum = [...name].reduce((acc, ch) => acc + ch.charCodeAt(0), 0)
+  return AVATAR_PALETTE[sum % AVATAR_PALETTE.length]
+}
+
 function useCounter(target: number, isVisible: boolean, duration = 1500) {
   const [count, setCount] = useState(0)
   useEffect(() => {
@@ -123,12 +144,12 @@ export default function Testimonials() {
             <blockquote>
               <p className="text-body-lg text-on-surface-variant leading-relaxed mb-8 italic">"{t.text}"</p>
               <footer className="flex items-center gap-4">
-                <img
-                  src={t.avatar}
-                  alt={`Foto de ${t.name}`}
-                  loading="lazy"
-                  className="w-12 h-12 rounded-full object-cover ring-2 ring-primary/20"
-                />
+                <div
+                  className={`w-12 h-12 rounded-full flex items-center justify-center font-label font-semibold text-label-md ring-2 ring-primary/20 ${getAvatarColor(t.name)}`}
+                  aria-hidden="true"
+                >
+                  {getInitials(t.name)}
+                </div>
                 <div>
                   <cite className="font-label font-semibold text-label-md text-on-surface not-italic">{t.name}</cite>
                   <p className="text-caption text-on-surface-variant mt-0.5">{t.role}</p>

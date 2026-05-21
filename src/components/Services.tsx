@@ -41,6 +41,9 @@ export default function Services() {
                   src={service.image}
                   alt={service.imageAlt}
                   loading="lazy"
+                  width="800"
+                  height="450"
+                  decoding="async"
                   className="w-full h-full object-cover"
                   whileHover={{ scale: 1.07 }}
                   transition={{ duration: 0.5, ease: 'easeOut' }}

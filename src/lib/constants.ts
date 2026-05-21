@@ -244,5 +244,6 @@ export const SALVADOR_NEIGHBORHOODS = [
   'Barra', 'Pituba', 'Graça', 'Vitória', 'Ondina', 'Rio Vermelho',
   'Itaigara', 'Caminho das Árvores', 'Imbuí', 'Brotas', 'Nazaré',
   'Federação', 'Canela', 'Garcia', 'Tororó', 'Cabula',
-  'Paralela', 'Patamares', 'Piatã', 'Stella Maris', 'Outro',
+  'Paralela', 'Patamares', 'Piatã', 'Stella Maris', 'Lauro de Freitas',
+  'Outro',
 ]

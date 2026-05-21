@@ -98,9 +98,12 @@ export default function HowItWorks() {
             <div className="aspect-[4/3] rounded-4xl overflow-hidden shadow-ambient-md">
               <img
                 src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=800&q=80"
-                alt="Avaliação domiciliar profissional em Salvador"
+                alt="Avaliação domiciliar gratuita por profissional da Elis em Salvador BA"
                 className="w-full h-full object-cover"
                 loading="lazy"
+                width="800"
+                height="600"
+                decoding="async"
               />
             </div>
           </motion.div>

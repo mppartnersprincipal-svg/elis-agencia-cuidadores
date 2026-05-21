@@ -2,13 +2,12 @@ import { motion } from 'framer-motion'
 import { ChevronDown, Star } from 'lucide-react'
 import { WHATSAPP_URL } from '../lib/constants'
 import { trackWhatsAppClick } from '../lib/tracking'
-import { Avatar, AvatarImage, AvatarFallback } from './ui/avatar'
 
-const SOCIAL_PROOF_AVATARS = [
-  { src: 'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=80&q=80', alt: 'Família atendida pela Elis' },
-  { src: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&q=80', alt: 'Família atendida pela Elis' },
-  { src: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=80&q=80', alt: 'Família atendida pela Elis' },
-  { src: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&q=80', alt: 'Família atendida pela Elis' },
+const SOCIAL_PROOF_INITIALS = [
+  { label: 'AC', bg: 'bg-primary text-on-primary' },
+  { label: 'RM', bg: 'bg-secondary text-on-secondary' },
+  { label: 'MO', bg: 'bg-primary-container text-on-primary-container' },
+  { label: 'CE', bg: 'bg-secondary-container text-on-secondary-container' },
 ]
 
 const fadeUp = { hidden: { opacity: 0, y: 24 }, visible: { opacity: 1, y: 0 } }
@@ -24,6 +23,10 @@ export default function Hero() {
           aria-hidden="true"
           className="w-full h-full object-cover object-top md:object-center"
           loading="eager"
+          fetchPriority="high"
+          width="1400"
+          height="900"
+          decoding="async"
         />
         <div className="absolute inset-0 gradient-forest opacity-75 md:opacity-85" />
       </div>
@@ -41,17 +44,14 @@ export default function Hero() {
               variants={fadeUp} transition={{ duration: 0.6 }}
               className="flex items-center gap-3 mb-6"
             >
-              <div className="flex -space-x-3">
-                {SOCIAL_PROOF_AVATARS.map((av, i) => (
-                  <Avatar
+              <div className="flex -space-x-3" aria-hidden="true">
+                {SOCIAL_PROOF_INITIALS.map((av, i) => (
+                  <div
                     key={i}
-                    className="ring-2 ring-white/30 w-10 h-10"
+                    className={`ring-2 ring-white/30 w-10 h-10 rounded-full flex items-center justify-center font-label font-semibold text-xs ${av.bg}`}
                   >
-                    <AvatarImage src={av.src} alt={av.alt} />
-                    <AvatarFallback className="bg-secondary text-on-secondary text-xs">
-                      {String.fromCharCode(65 + i)}
-                    </AvatarFallback>
-                  </Avatar>
+                    {av.label}
+                  </div>
                 ))}
               </div>
               <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white font-label text-label-md">
@@ -119,8 +119,12 @@ export default function Hero() {
             <div className="rounded-4xl overflow-hidden shadow-ambient-md border-4 border-white/10">
               <img
                 src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&q=80"
-                alt="Cuidadora profissional com paciente"
+                alt="Cuidadora profissional de home care em Salvador BA auxiliando paciente idoso em casa"
                 className="w-full h-[520px] object-cover"
+                loading="eager"
+                width="800"
+                height="520"
+                decoding="async"
               />
             </div>
             {/* Floating stat card */}
