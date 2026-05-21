@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { ChevronDown, Star } from 'lucide-react'
 import { WHATSAPP_URL } from '../lib/constants'
+import { trackWhatsAppClick } from '../lib/tracking'
 import { Avatar, AvatarImage, AvatarFallback } from './ui/avatar'
 
 const SOCIAL_PROOF_AVATARS = [
@@ -87,6 +88,9 @@ export default function Hero() {
                 href={WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackWhatsAppClick('hero')}
+                data-gtm-event="whatsapp_click"
+                data-gtm-location="hero"
                 className="inline-flex items-center justify-center gap-2 bg-white hover:bg-primary-fixed text-primary font-label font-semibold text-label-md px-8 py-4 rounded-full transition-all duration-200 shadow-ambient-md hover:shadow-ambient-md hover:-translate-y-0.5 active:translate-y-0 active:scale-95 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2"
               >
                 <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current" aria-hidden="true">

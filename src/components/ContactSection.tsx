@@ -2,10 +2,11 @@ import { motion } from 'framer-motion'
 import { Phone, Clock, MapPin, MessageCircle } from 'lucide-react'
 import { fadeLeft, fadeRight, blurIn, staggerContainer, viewport } from '../lib/animations'
 import { WHATSAPP_URL, PHONE_NUMBER } from '../lib/constants'
+import { trackWhatsAppClick } from '../lib/tracking'
 import ContactForm from './ContactForm'
 
 const INFO_CARDS = [
-  { icon: MessageCircle, iconBg: 'bg-secondary-container', iconColor: 'text-secondary', hoverBg: 'group-hover:bg-secondary', hoverIcon: 'group-hover:text-on-secondary', title: 'WhatsApp', value: PHONE_NUMBER, subtitle: 'Resposta em até 2 horas', href: WHATSAPP_URL, external: true },
+  { icon: MessageCircle, iconBg: 'bg-secondary-container', iconColor: 'text-secondary', hoverBg: 'group-hover:bg-secondary', hoverIcon: 'group-hover:text-on-secondary', title: 'WhatsApp', value: PHONE_NUMBER, subtitle: 'Resposta em até 2 horas', href: WHATSAPP_URL, external: true, trackWhatsApp: true },
   { icon: Phone, iconBg: 'bg-primary-fixed', iconColor: 'text-primary', hoverBg: 'group-hover:bg-primary', hoverIcon: 'group-hover:text-on-primary', title: 'Ligar', value: PHONE_NUMBER, subtitle: 'Atendimento imediato', href: 'tel:71999783417', external: false },
   { icon: Clock, iconBg: 'bg-surface-container-high', iconColor: 'text-on-surface-variant', hoverBg: '', hoverIcon: '', title: 'Horário de Atendimento', value: 'Seg a Dom, 24h por dia', subtitle: 'Incluindo feriados', href: null, external: false },
   { icon: MapPin, iconBg: 'bg-surface-container-high', iconColor: 'text-on-surface-variant', hoverBg: '', hoverIcon: '', title: 'Área de Atendimento', value: 'Salvador e Região', subtitle: 'Bahia, Brasil', href: null, external: false },
@@ -40,8 +41,19 @@ export default function ContactSection() {
             {INFO_CARDS.map((card) => {
               const Icon = card.icon
               const Wrapper = card.href ? 'a' : 'div'
+              const isWhatsApp = 'trackWhatsApp' in card && card.trackWhatsApp
               const extraProps = card.href
-                ? { href: card.href, ...(card.external ? { target: '_blank', rel: 'noopener noreferrer' } : {}) }
+                ? {
+                    href: card.href,
+                    ...(card.external ? { target: '_blank', rel: 'noopener noreferrer' } : {}),
+                    ...(isWhatsApp
+                      ? {
+                          onClick: () => trackWhatsAppClick('contact_section_card'),
+                          'data-gtm-event': 'whatsapp_click',
+                          'data-gtm-location': 'contact_section_card',
+                        }
+                      : {}),
+                  }
                 : {}
 
               return (

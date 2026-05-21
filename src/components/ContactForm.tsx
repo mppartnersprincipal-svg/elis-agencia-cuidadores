@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import { Send, CheckCircle, AlertCircle } from 'lucide-react'
 import { contactSchema, type ContactFormData } from '../lib/validation'
 import { SALVADOR_NEIGHBORHOODS, WHATSAPP_URL } from '../lib/constants'
+import { trackWhatsAppClick } from '../lib/tracking'
 
 const SERVICE_OPTIONS = [
   { value: 'longa-permanencia', label: 'Longa Permanência (24h)' },
@@ -39,6 +40,10 @@ export default function ContactForm() {
       `Bairro: ${data.neighborhood}\n` +
       (data.specialNeeds ? `Necessidades: ${data.specialNeeds}` : '')
     )
+    trackWhatsAppClick('contact_form_submit', {
+      service_type: data.serviceType,
+      neighborhood: data.neighborhood,
+    })
     window.open(`https://wa.me/5571999783417?text=${msg}`, '_blank')
     setSubmitted(true)
   }
@@ -49,7 +54,15 @@ export default function ContactForm() {
         <CheckCircle size={52} className="text-secondary mx-auto mb-4" aria-hidden="true" />
         <h3 className="font-headline text-headline-sm text-on-surface mb-2">Solicitação Enviada!</h3>
         <p className="text-body-md text-on-surface-variant mb-6">Abrimos o WhatsApp para você. Respondemos em até 2 horas.</p>
-        <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn-primary inline-flex">
+        <a
+          href={WHATSAPP_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => trackWhatsAppClick('contact_form_success')}
+          data-gtm-event="whatsapp_click"
+          data-gtm-location="contact_form_success"
+          className="btn-primary inline-flex"
+        >
           Continuar no WhatsApp
         </a>
       </div>

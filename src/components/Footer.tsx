@@ -1,5 +1,6 @@
 import { ArrowUp, Phone, Instagram, MapPin, ShieldCheck, Award, Star } from 'lucide-react'
 import { WHATSAPP_URL, PHONE_NUMBER, INSTAGRAM_URL } from '../lib/constants'
+import { trackWhatsAppClick } from '../lib/tracking'
 import LogoElis from './LogoElis'
 
 const NAV_LINKS = [
@@ -53,6 +54,9 @@ export default function Footer() {
                   href={WHATSAPP_URL}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => trackWhatsAppClick('footer_link')}
+                  data-gtm-event="whatsapp_click"
+                  data-gtm-location="footer_link"
                   className="flex items-center gap-2.5 text-body-md text-inverse-on-surface/60 hover:text-inverse-on-surface transition-colors"
                 >
                   <svg viewBox="0 0 24 24" className="w-4 h-4 fill-secondary flex-shrink-0" aria-hidden="true">
@@ -136,9 +140,12 @@ export default function Footer() {
 
       {/* Floating WhatsApp */}
       <a
-        href="https://wa.me/5571999783417?text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20uma%20avalia%C3%A7%C3%A3o%20gratuita."
+        href={WHATSAPP_URL}
         target="_blank"
         rel="noopener noreferrer"
+        onClick={() => trackWhatsAppClick('footer_floating')}
+        data-gtm-event="whatsapp_click"
+        data-gtm-location="footer_floating"
         className="fixed bottom-6 right-6 w-14 h-14 bg-[#25D366] hover:bg-[#20bc5a] text-white rounded-full shadow-ambient-md flex items-center justify-center transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_8px_24px_rgba(37,211,102,0.4)] focus:outline-none focus:ring-2 focus:ring-[#25D366] focus:ring-offset-2 z-40"
         aria-label="Falar no WhatsApp"
       >

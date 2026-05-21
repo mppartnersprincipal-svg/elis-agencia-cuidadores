@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { Menu, X, Phone } from 'lucide-react'
 import { WHATSAPP_URL, PHONE_NUMBER } from '../lib/constants'
+import { trackWhatsAppClick } from '../lib/tracking'
 import LogoElis from './LogoElis'
 
 const NAV_LINKS = [
@@ -93,6 +94,9 @@ export default function Navbar() {
             href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackWhatsAppClick('navbar_desktop')}
+            data-gtm-event="whatsapp_click"
+            data-gtm-location="navbar_desktop"
             className="bg-primary hover:bg-primary-container text-on-primary font-label text-label-md px-6 py-2.5 rounded-full transition-all duration-200 shadow-ambient hover:-translate-y-0.5"
           >
             WhatsApp
@@ -142,6 +146,9 @@ export default function Navbar() {
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackWhatsAppClick('navbar_mobile')}
+              data-gtm-event="whatsapp_click"
+              data-gtm-location="navbar_mobile"
               className="btn-primary justify-center"
             >
               Falar no WhatsApp

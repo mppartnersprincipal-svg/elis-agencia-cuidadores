@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { Phone } from 'lucide-react'
 import { scaleUp, blurIn, popIn, staggerContainer, viewport } from '../lib/animations'
 import { WHATSAPP_URL, PHONE_NUMBER } from '../lib/constants'
+import { trackWhatsAppClick } from '../lib/tracking'
 
 const TRUST_BADGES = [
   'Avaliação domiciliar gratuita',
@@ -49,6 +50,9 @@ export default function CTAFinal() {
                   href={WHATSAPP_URL}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => trackWhatsAppClick('cta_final')}
+                  data-gtm-event="whatsapp_click"
+                  data-gtm-location="cta_final"
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
                   className="relative inline-flex items-center justify-center gap-3 bg-on-primary-container text-primary font-label text-label-md font-bold px-10 py-4 rounded-full shadow-ambient-md focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary-container hover:bg-primary-fixed transition-colors"
