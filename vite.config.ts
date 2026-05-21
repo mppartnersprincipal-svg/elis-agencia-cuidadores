@@ -20,8 +20,6 @@ export default defineConfig({
           'vendor-react': ['react', 'react-dom'],
           // Animation library — large, load separately
           'vendor-motion': ['framer-motion'],
-          // Form validation
-          'vendor-forms': ['react-hook-form', '@hookform/resolvers', 'zod'],
         },
       },
     },

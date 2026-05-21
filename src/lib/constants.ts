@@ -83,7 +83,7 @@ export const HOW_IT_WORKS = [
   {
     step: 1,
     title: 'Fale com a gente',
-    description: 'Mande uma mensagem pelo WhatsApp ou preencha o formulário. Respondemos em até 2 horas — mesmo nos fins de semana.',
+    description: 'Mande uma mensagem pelo WhatsApp ou nos ligue. Respondemos em até 2 horas — mesmo nos fins de semana.',
     icon: 'MessageCircle',
     time: 'Resposta em até 2h',
   },

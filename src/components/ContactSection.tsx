@@ -1,9 +1,8 @@
 import { motion } from 'framer-motion'
 import { Phone, Clock, MapPin, MessageCircle } from 'lucide-react'
-import { fadeLeft, fadeRight, blurIn, staggerContainer, viewport } from '../lib/animations'
+import { fadeLeft, blurIn, staggerContainer, viewport } from '../lib/animations'
 import { WHATSAPP_URL, PHONE_NUMBER } from '../lib/constants'
 import { trackWhatsAppClick } from '../lib/tracking'
-import ContactForm from './ContactForm'
 
 const INFO_CARDS = [
   { icon: MessageCircle, iconBg: 'bg-secondary-container', iconColor: 'text-secondary', hoverBg: 'group-hover:bg-secondary', hoverIcon: 'group-hover:text-on-secondary', title: 'WhatsApp', value: PHONE_NUMBER, subtitle: 'Resposta em até 2 horas', href: WHATSAPP_URL, external: true, trackWhatsApp: true },
@@ -21,72 +20,58 @@ export default function ContactSection() {
           initial="hidden"
           whileInView="show"
           viewport={viewport}
-          className="mb-14"
+          className="mb-14 text-center"
         >
           <h2 id="contato-title" className="section-title font-headline">Comece hoje. A avaliação é gratuita.</h2>
           <p className="section-subtitle">
-            Preencha o formulário ou mande uma mensagem no WhatsApp. Nossa equipe responde em até 2 horas — incluindo fins de semana.
+            Mande uma mensagem no WhatsApp ou nos ligue. Nossa equipe responde em até 2 horas — incluindo fins de semana.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12">
-          {/* Sidebar — stagger from left */}
-          <motion.div
-            variants={staggerContainer(0.1)}
-            initial="hidden"
-            whileInView="show"
-            viewport={viewport}
-            className="lg:col-span-2 space-y-4"
-          >
-            {INFO_CARDS.map((card) => {
-              const Icon = card.icon
-              const Wrapper = card.href ? 'a' : 'div'
-              const isWhatsApp = 'trackWhatsApp' in card && card.trackWhatsApp
-              const extraProps = card.href
-                ? {
-                    href: card.href,
-                    ...(card.external ? { target: '_blank', rel: 'noopener noreferrer' } : {}),
-                    ...(isWhatsApp
-                      ? {
-                          onClick: () => trackWhatsAppClick('contact_section_card'),
-                          'data-gtm-event': 'whatsapp_click',
-                          'data-gtm-location': 'contact_section_card',
-                        }
-                      : {}),
-                  }
-                : {}
+        <motion.div
+          variants={staggerContainer(0.1)}
+          initial="hidden"
+          whileInView="show"
+          viewport={viewport}
+          className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-3xl mx-auto"
+        >
+          {INFO_CARDS.map((card) => {
+            const Icon = card.icon
+            const Wrapper = card.href ? 'a' : 'div'
+            const isWhatsApp = 'trackWhatsApp' in card && card.trackWhatsApp
+            const extraProps = card.href
+              ? {
+                  href: card.href,
+                  ...(card.external ? { target: '_blank', rel: 'noopener noreferrer' } : {}),
+                  ...(isWhatsApp
+                    ? {
+                        onClick: () => trackWhatsAppClick('contact_section_card'),
+                        'data-gtm-event': 'whatsapp_click',
+                        'data-gtm-location': 'contact_section_card',
+                      }
+                    : {}),
+                }
+              : {}
 
-              return (
-                <motion.div key={card.title} variants={fadeLeft}>
-                  <Wrapper
-                    {...(extraProps as any)}
-                    className={`flex items-start gap-4 p-5 card group ${card.href ? 'hover:-translate-y-0.5 hover:shadow-ambient-md cursor-pointer' : ''} transition-all duration-300`}
-                  >
-                    <div className={`w-11 h-11 ${card.iconBg} ${card.hoverBg} rounded-xl flex items-center justify-center flex-shrink-0 transition-colors duration-300`}>
-                      <Icon size={20} className={`${card.iconColor} ${card.hoverIcon} transition-colors duration-300`} aria-hidden="true" />
-                    </div>
-                    <div>
-                      <p className="font-label text-label-md text-on-surface">{card.title}</p>
-                      <p className={`text-body-md mt-0.5 ${card.href ? 'text-primary' : 'text-on-surface'} font-semibold`}>{card.value}</p>
-                      <p className="text-caption text-on-surface-variant mt-0.5">{card.subtitle}</p>
-                    </div>
-                  </Wrapper>
-                </motion.div>
-              )
-            })}
-          </motion.div>
-
-          {/* Form — slides from right */}
-          <motion.div
-            variants={fadeRight}
-            initial="hidden"
-            whileInView="show"
-            viewport={viewport}
-            className="lg:col-span-3 bg-surface-container-lowest rounded-4xl shadow-ambient p-6 sm:p-8 border border-outline-variant/20"
-          >
-            <ContactForm />
-          </motion.div>
-        </div>
+            return (
+              <motion.div key={card.title} variants={fadeLeft}>
+                <Wrapper
+                  {...(extraProps as any)}
+                  className={`flex items-start gap-4 p-5 card group h-full ${card.href ? 'hover:-translate-y-0.5 hover:shadow-ambient-md cursor-pointer' : ''} transition-all duration-300`}
+                >
+                  <div className={`w-11 h-11 ${card.iconBg} ${card.hoverBg} rounded-xl flex items-center justify-center flex-shrink-0 transition-colors duration-300`}>
+                    <Icon size={20} className={`${card.iconColor} ${card.hoverIcon} transition-colors duration-300`} aria-hidden="true" />
+                  </div>
+                  <div>
+                    <p className="font-label text-label-md text-on-surface">{card.title}</p>
+                    <p className={`text-body-md mt-0.5 ${card.href ? 'text-primary' : 'text-on-surface'} font-semibold`}>{card.value}</p>
+                    <p className="text-caption text-on-surface-variant mt-0.5">{card.subtitle}</p>
+                  </div>
+                </Wrapper>
+              </motion.div>
+            )
+          })}
+        </motion.div>
       </div>
     </section>
   )

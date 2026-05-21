@@ -64,13 +64,6 @@ export default function CTAFinal() {
                   <span className="relative">Falar no WhatsApp Agora</span>
                 </motion.a>
 
-                <button
-                  onClick={() => document.querySelector('#contato')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="inline-flex items-center justify-center gap-2 border-2 border-on-primary-container/60 hover:border-on-primary-container text-on-primary-container font-label text-label-md font-semibold px-10 py-4 rounded-full transition-all duration-200 hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-on-primary-container"
-                >
-                  Preencher Formulário
-                </button>
-
                 <a
                   href="tel:71999783417"
                   className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-on-primary-container font-label text-label-md font-semibold px-6 py-4 rounded-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-on-primary-container"
