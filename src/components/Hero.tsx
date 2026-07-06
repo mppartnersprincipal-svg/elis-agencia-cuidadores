@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { ChevronDown, Star } from 'lucide-react'
+import { AlertTriangle, ChevronDown, Star } from 'lucide-react'
 import { WHATSAPP_URL } from '../lib/constants'
 import { trackWhatsAppClick } from '../lib/tracking'
 
@@ -82,7 +82,7 @@ export default function Hero() {
 
             <motion.div
               variants={fadeUp} transition={{ duration: 0.6 }}
-              className="flex flex-col sm:flex-row gap-4 mb-10"
+              className="flex flex-col sm:flex-row gap-4 mb-6"
             >
               <a
                 href={WHATSAPP_URL}
@@ -105,6 +105,20 @@ export default function Hero() {
                 Ver os Serviços
               </button>
             </motion.div>
+
+            {/* Aviso: não estamos contratando */}
+            <motion.button
+              variants={fadeUp} transition={{ duration: 0.6 }}
+              onClick={() => document.getElementById('nao-estamos-contratando')?.scrollIntoView({ behavior: 'smooth' })}
+              className="flex items-start gap-3 bg-error-container border-2 border-error/40 rounded-2xl px-5 py-4 max-w-lg mb-10 text-left shadow-ambient-md hover:-translate-y-0.5 transition-transform duration-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-transparent"
+              aria-label="Aviso: não estamos contratando cuidadores. Clique para saber mais."
+            >
+              <AlertTriangle size={20} className="text-on-error-container flex-shrink-0 mt-0.5" aria-hidden="true" />
+              <span className="text-body-md text-on-error-container leading-snug">
+                <strong className="font-bold uppercase">Atenção: não estamos contratando cuidadores.</strong>{' '}
+                WhatsApp exclusivo para famílias — currículos e pedidos de emprego não serão respondidos.
+              </span>
+            </motion.button>
 
           </motion.div>
 

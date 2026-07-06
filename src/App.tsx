@@ -9,6 +9,7 @@ import DetailedServices from './components/DetailedServices'
 import Pricing from './components/Pricing'
 import Testimonials from './components/Testimonials'
 import FAQ from './components/FAQ'
+import HiringNotice from './components/HiringNotice'
 import ContactSection from './components/ContactSection'
 import CTAFinal from './components/CTAFinal'
 import CoverageArea from './components/CoverageArea'
@@ -52,6 +53,7 @@ export default function App() {
         <Testimonials />
         <FAQ />
         <CoverageArea />
+        <HiringNotice />
         <ContactSection />
         <CTAFinal />
       </main>

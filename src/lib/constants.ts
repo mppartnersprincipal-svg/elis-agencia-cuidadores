@@ -207,6 +207,10 @@ export const TESTIMONIALS = [
 
 export const FAQ_ITEMS = [
   {
+    question: 'Vocês estão contratando cuidadores?',
+    answer: 'Não. No momento não estamos contratando e não há vagas abertas. Nosso WhatsApp é exclusivo para famílias que buscam contratar serviços de cuidado — mensagens com currículos ou pedidos de emprego não poderão ser respondidas. Quando abrirmos novas vagas, o anúncio será feito no nosso Instagram (@elisagenciacuidadores).',
+  },
+  {
     question: 'Como sei que o cuidador é de confiança?',
     answer: 'Todos os cuidadores passam por verificação de antecedentes criminais, conferência de formação profissional (Técnico em Enfermagem ou Cuidador Certificado) e entrevistas antes de entrar em qualquer lar. Você também conhece e aprova o profissional antes do início do serviço.',
   },
