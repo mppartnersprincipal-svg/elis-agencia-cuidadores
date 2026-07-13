@@ -1,5 +1,6 @@
 export const WHATSAPP_NUMBER = '5571999783417'
-export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20uma%20avalia%C3%A7%C3%A3o%20gratuita.`
+export const WHATSAPP_MESSAGE = 'Olá! Gostaria de saber mais sobre os serviços de cuidadores da Elis.'
+export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`
 export const INSTAGRAM_URL = 'https://instagram.com/elisagenciacuidadores'
 export const PHONE_NUMBER = '(71) 99978-3417'
 
